@@ -11,12 +11,15 @@ export const Register = () => {
   const buttonBack = document.createElement('button');
   const inputEmail = document.createElement('input');
   const inputPass = document.createElement('input');
-  inputPass.type = 'password';
-  inputEmail.placeholder = 'email';
-  inputPass.placeholder = 'password';
-  button.textContent = 'Sing In';
+
+  inputPass.type = 'Password';
+  inputEmail.placeholder = 'Email';
+  inputPass.placeholder = 'Password';
+  button.textContent = 'Sing Up';
   buttonBack.textContent = 'Back';
   title.textContent = 'Registrar';
+  firstName.placeholder = 'First Name';
+  lastName.placeholder = 'Last Name';
 
   button.addEventListener('click', async () => {
     const email = inputEmail.value;
@@ -26,6 +29,7 @@ export const Register = () => {
     try {
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
       console.log(userCredentials);
+      onNavigate('/StartPage');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario
@@ -40,6 +44,7 @@ export const Register = () => {
   buttonBack.addEventListener('click', () => {
     onNavigate('/');
   });
+
   div.append(title, firstName, lastName, inputEmail, inputPass, button, buttonBack);
   return div;
 };
