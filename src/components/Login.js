@@ -7,11 +7,13 @@ export const Login = () => {
   const buttonBack = document.createElement('button');
   const inputEmail = document.createElement('input');
   const inputPass = document.createElement('input');
-
+  inputEmail.placeholder = 'email';
+  inputPass.placeholder = 'password';
   button.textContent = 'Sing In';
   buttonBack.textContent = 'Back';
   title.textContent = 'Login';
-  button.addEventListener('click', () => {
+
+ button.addEventListener('click', () => {
     onNavigate('/');
   });
   buttonBack.addEventListener('click', () => {
