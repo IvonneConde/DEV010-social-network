@@ -1,30 +1,45 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { onNavigate } from '../main.js';
+import { auth } from './Firebase.js';
 
 export const Register = () => {
   const div = document.createElement('div');
   const title = document.createElement('h2');
   const firstName = document.createElement('input');
   const lastName = document.createElement('input');
-  const email = document.createElement('input');
-  const password = document.createElement('input');
-  const confirmPassword = document.createElement('input');
   const button = document.createElement('button');
   const buttonBack = document.createElement('button');
-
-  firstName.placeholder = 'First Name';
-  lastName.placeholder = 'Last Name';
-  email.placeholder = 'Email';
-  password.placeholder = 'Password';
-  confirmPassword.placeholder = 'Confirm Password';
-  title.textContent = 'Register';
+  const inputEmail = document.createElement('input');
+  const inputPass = document.createElement('input');
+  inputPass.type = 'password';
+  inputEmail.placeholder = 'email';
+  inputPass.placeholder = 'password';
   button.textContent = 'Sing In';
   buttonBack.textContent = 'Back';
-  button.addEventListener('click', () => {
-    onNavigate('/');
+  title.textContent = 'Registrar';
+
+  button.addEventListener('click', async () => {
+    const email = inputEmail.value;
+    const password = inputPass.value;
+    // console.log(email.value, password.value);
+
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(userCredentials);
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        // El correo electrónico ya está en uso, muestra un mensaje al usuario
+        alert('El correo electrónico ya está en uso. Por favor, utilice otro correo electrónico.');
+      } else {
+        // Otro error, muestra un mensaje de error genérico o registra el error en la consola
+        console.error(error);
+      }
+    }
   });
+
   buttonBack.addEventListener('click', () => {
     onNavigate('/');
   });
-  div.append(title, firstName, lastName, email, password, confirmPassword, button, buttonBack);
+  div.append(title, firstName, lastName, inputEmail, inputPass, button, buttonBack);
   return div;
 };
