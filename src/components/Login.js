@@ -1,10 +1,9 @@
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { onNavigate } from '../main.js';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from './Firebase.js';
-import { async } from 'regenerator-runtime';
 
 export const Login = () => {
-  const div = document.createElement('div');
+  const section = document.createElement('section');
   const title = document.createElement('h2');
   const button = document.createElement('button');
   const buttonBack = document.createElement('button');
@@ -20,24 +19,39 @@ export const Login = () => {
   title.textContent = 'Login';
   buttonGoogle.textContent = 'Google';
 
-  button.addEventListener('click', () => {
-    onNavigate('/');
-  });
-  buttonBack.addEventListener('click', () => {
-    onNavigate('/');
-  });
-  buttonGoogle.addEventListener('click', async () => {
-    const provider = new GoogleAuthProvider()
-    signInWithPopup(auth, provider)
+  button.addEventListener('click', async () => {
+    const email = inputEmail.value;
+    const password = inputPass.value;
 
     try {
-      const credentials = await signInWithPopup(auth, provider)
+      await signInWithEmailAndPassword(auth, email, password);
       onNavigate('/StartPage');
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      if (error.code === 'auth/wrong-password') {
+        // El correo electrónico ya está en uso, muestra un mensaje al usuario
+        alert('La contraseña es incorrecta');
+      } else if (error.code === 'auth/invalid-email') {
+        alert('Email inválido');
+      }
     }
   });
 
-  div.append(title, buttonGoogle, inputEmail, inputPass, button, buttonBack,);
-  return div;
+  buttonBack.addEventListener('click', () => {
+    onNavigate('/');
+  });
+
+  buttonGoogle.addEventListener('click', async () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+
+    try {
+      await signInWithPopup(auth, provider);
+      onNavigate('/StartPage');
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  section.append(title, buttonGoogle, inputEmail, inputPass, button, buttonBack);
+  return section;
 };

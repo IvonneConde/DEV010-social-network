@@ -3,10 +3,8 @@ import { onNavigate } from '../main.js';
 import { auth } from './Firebase.js';
 
 export const Register = () => {
-  const div = document.createElement('div');
+  const section = document.createElement('section');
   const title = document.createElement('h2');
-  const firstName = document.createElement('input');
-  const lastName = document.createElement('input');
   const button = document.createElement('button');
   const buttonBack = document.createElement('button');
   const inputEmail = document.createElement('input');
@@ -18,8 +16,6 @@ export const Register = () => {
   button.textContent = 'Sing Up';
   buttonBack.textContent = 'Back';
   title.textContent = 'Registrar';
-  firstName.placeholder = 'First Name';
-  lastName.placeholder = 'Last Name';
 
   button.addEventListener('click', async () => {
     const email = inputEmail.value;
@@ -34,9 +30,10 @@ export const Register = () => {
       if (error.code === 'auth/email-already-in-use') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario
         alert('El correo electrónico ya está en uso. Por favor, utilice otro correo electrónico.');
-      } else {
-        // Otro error, muestra un mensaje de error genérico o registra el error en la consola
-        console.error(error);
+      } else if (error.code === 'auth/weak-password') {
+        alert('La contraseña debe tener más de 6 carácteres');
+      } else if (error.code === 'auth/invalid-email') {
+        alert('Email inválido');
       }
     }
   });
@@ -45,6 +42,6 @@ export const Register = () => {
     onNavigate('/');
   });
 
-  div.append(title, firstName, lastName, inputEmail, inputPass, button, buttonBack);
-  return div;
+  section.append(title, inputEmail, inputPass, button, buttonBack);
+  return section;
 };

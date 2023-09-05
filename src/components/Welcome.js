@@ -1,7 +1,7 @@
 import { onNavigate } from '../main.js';
 
 export const Welcome = () => {
-  const div = document.createElement('div');
+  const section = document.createElement('section');
   const title = document.createElement('h2');
   const buttonLogin = document.createElement('button');
   const buttonRegister = document.createElement('button');
@@ -17,6 +17,6 @@ export const Welcome = () => {
   buttonRegister.addEventListener('click', () => {
     onNavigate('/Register');
   });
-  div.append(title, buttonLogin, buttonRegister);
-  return div;
+  section.append(title, buttonLogin, buttonRegister);
+  return section;
 };
