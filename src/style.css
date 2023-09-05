@@ -1,0 +1,21 @@
+body {
+    font-family: 'Lato';
+  }
+  h1, h2 {
+    color: #C96A36;
+    font-weight: bold;
+  }
+  button {
+      color: #FFFFFF;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      display: inline;
+      border: none;
+      border-radius: 30px;
+      background-color: #C96A36;
+      margin: 10px;
+      height: 35px;
+      width: 200px;
+      cursor: pointer;
+      transition: background-color 0.5s, color 0.5s;
+    }
