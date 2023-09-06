@@ -8,7 +8,8 @@ export const Welcome = () => {
 
   buttonLogin.textContent = 'Sing In';
   buttonRegister.textContent = 'Sing Up';
-  title.textContent = 'WELCOME LA MEJOR RED SOCIAL';
+  title.textContent = 'Welcome';
+  section.setAttribute('id', 'welcome-section');
 
   buttonLogin.addEventListener('click', () => {
     onNavigate('/Login');

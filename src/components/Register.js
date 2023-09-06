@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import { auth } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
@@ -6,6 +6,7 @@ import { showMenssaje } from './ShowMenssaje.js';
 export const Register = () => {
   const section = document.createElement('section');
   const title = document.createElement('h2');
+  const welcomeReg = document.createElement('p');
   const button = document.createElement('button');
   const buttonBack = document.createElement('button');
   const inputEmail = document.createElement('input');
@@ -16,7 +17,8 @@ export const Register = () => {
   inputPass.placeholder = 'Password';
   button.textContent = 'Sing Up';
   buttonBack.textContent = 'Back';
-  title.textContent = 'Registrar';
+  title.textContent = 'Create Account';
+  welcomeReg.textContent = 'We\'re glad you\'re here';
 
   button.addEventListener('click', async () => {
     const email = inputEmail.value;
@@ -26,6 +28,7 @@ export const Register = () => {
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
       //console.log(userCredentials);
       showMenssaje(`we send an email ${userCredentials.user.email}`);
+      sendEmailVerification(auth.currentUser);
       // onNavigate('/StartPage');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
@@ -43,6 +46,6 @@ export const Register = () => {
     onNavigate('/');
   });
 
-  section.append(title, inputEmail, inputPass, button, buttonBack);
+  section.append(title, welcomeReg, inputEmail, inputPass, button, buttonBack);
   return section;
 };
