@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import { auth } from './Firebase.js';
+import { showMenssaje } from './ShowMenssaje.js';
 
 export const Login = () => {
   const section = document.createElement('section');
@@ -24,14 +25,15 @@ export const Login = () => {
     const password = inputPass.value;
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredentials);
       onNavigate('/StartPage');
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario
-        alert('La contraseña es incorrecta');
+        showMenssaje('Incorrect password', 'error');
       } else if (error.code === 'auth/invalid-email') {
-        alert('Email inválido');
+        showMenssaje('invalid Email', 'error');
       }
     }
   });
