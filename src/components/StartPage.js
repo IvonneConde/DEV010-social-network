@@ -3,14 +3,14 @@ import { onNavigate } from '../main.js';
 export const StartPage = () => {
   const title = document.createElement('h1');
   const div = document.createElement('section');
-  const signOut = document.createElement('button');
+  const logOut = document.createElement('button');
 
   title.textContent = 'Bienvenidos';
-  signOut.textContent = 'sign Out';
+  logOut.textContent = 'Log out';
 
-  signOut.addEventListener('click', () => {
+  logOut.addEventListener('click', () => {
     onNavigate('/');
   });
-  div.append(title, signOut);
+  div.append(title, logOut);
   return div;
 };
