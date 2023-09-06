@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import { auth } from './Firebase.js';
+import { showMenssaje } from './ShowMenssaje.js';
 
 export const Register = () => {
   const section = document.createElement('section');
@@ -21,19 +22,19 @@ export const Register = () => {
     const email = inputEmail.value;
     const password = inputPass.value;
     // console.log(email.value, password.value);
-
     try {
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(userCredentials);
-      onNavigate('/StartPage');
+      //console.log(userCredentials);
+      showMenssaje(`we send an email ${userCredentials.user.email}`);
+      // onNavigate('/StartPage');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario
-        alert('El correo electrónico ya está en uso. Por favor, utilice otro correo electrónico.');
+        showMenssaje('Email already in use', 'error');
       } else if (error.code === 'auth/weak-password') {
-        alert('La contraseña debe tener más de 6 carácteres');
+        showMenssaje('password more than 6 characters', 'error');
       } else if (error.code === 'auth/invalid-email') {
-        alert('Email inválido');
+        showMenssaje('Email invalid', 'error');
       }
     }
   });
