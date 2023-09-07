@@ -26,7 +26,6 @@ export const Register = () => {
     // console.log(email.value, password.value);
     try {
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-      //console.log(userCredentials);
       showMenssaje(`we send an email ${userCredentials.user.email}`);
       sendEmailVerification(auth.currentUser);
       // onNavigate('/StartPage');

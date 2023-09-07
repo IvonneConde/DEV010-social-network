@@ -11,10 +11,10 @@ h1, h2 {
   }
 button {
     display: flex;
+    display: inline;
     color: #FFFFFF;
     font-family: 'Lato', sans-serif;
     font-weight: bold;
-    display: inline;
     border: none;
     border-radius: 30px;
     background-color: #C96A36;
@@ -42,7 +42,19 @@ input {
   border-radius: 5px;
   font-size: 16px;
 }
-
+#button-Login{
+  position: fixed;
+  bottom: 100px;
+ 
+}
+#button-Register{
+  position: fixed;
+  bottom: 50px;
+}
+.title{
+  position: fixed;
+  bottom: 150px;
+}
 #welcome-section {
   display: flex;
   flex-direction: column;

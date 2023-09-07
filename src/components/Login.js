@@ -25,8 +25,7 @@ export const Login = () => {
     const password = inputPass.value;
 
     try {
-      const userCredentials = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userCredentials);
+      await signInWithEmailAndPassword(auth, email, password);
       onNavigate('/StartPage');
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
@@ -50,7 +49,7 @@ export const Login = () => {
       await signInWithPopup(auth, provider);
       onNavigate('/StartPage');
     } catch (error) {
-      console.log(error);
+      showMenssaje('Error Popup', 'error');
     }
   });
 
