@@ -9,7 +9,10 @@ export const Welcome = () => {
   buttonLogin.textContent = 'Sing In';
   buttonRegister.textContent = 'Sing Up';
   title.textContent = 'Welcome';
+  title.classList.add('title');
   section.setAttribute('id', 'welcome-section');
+  buttonLogin.setAttribute('id', 'button-Login');
+  buttonRegister.setAttribute('id', 'button-Register');
 
   buttonLogin.addEventListener('click', () => {
     onNavigate('/Login');

@@ -1,4 +1,7 @@
+import { signOut } from 'firebase/auth';
 import { onNavigate } from '../main.js';
+import { auth } from './Firebase.js';
+import { showMenssaje } from './ShowMenssaje.js';
 
 export const StartPage = () => {
   const title = document.createElement('h1');
@@ -9,7 +12,11 @@ export const StartPage = () => {
   logOut.textContent = 'Log out';
 
   logOut.addEventListener('click', () => {
-    onNavigate('/');
+    signOut(auth).then(() => {
+      onNavigate('/');
+    }).catch((error) => {
+      showMenssaje('error the logout', error);
+    });
   });
   div.append(title, logOut);
   return div;

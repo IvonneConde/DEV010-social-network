@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export function showMenssaje(messaje, type = 'success') {
   Toastify({
     text: messaje,
@@ -5,7 +6,7 @@ export function showMenssaje(messaje, type = 'success') {
     destination: 'https://github.com/apvarun/toastify-js',
     newWindow: true,
     close: true,
-    gravity: 'button', // `top` or `bottom`
+    gravity: 'bottom', // `top` or `bottom`
     position: 'center', // `left`, `center` or `right`
     stopOnFocus: true, // Prevents dismissing of toast on hover
     style: {
