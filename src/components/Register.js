@@ -1,7 +1,8 @@
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { verify } from '../services/authVerificar.js';
 import { onNavigate } from '../main.js';
-import { auth } from './Firebase.js';
+//import { auth } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
+import { serviceRegister } from '../services/authServices.js';
 
 export const Register = () => {
   const section = document.createElement('section');
@@ -16,6 +17,7 @@ export const Register = () => {
   inputEmail.placeholder = 'Email';
   inputPass.placeholder = 'Password';
   button.textContent = 'Sing Up';
+  button.id = 'button';
   buttonBack.textContent = 'Back';
   title.textContent = 'Create Account';
   welcomeReg.textContent = 'We\'re glad you\'re here';
@@ -23,12 +25,12 @@ export const Register = () => {
   button.addEventListener('click', async () => {
     const email = inputEmail.value;
     const password = inputPass.value;
-    // console.log(email.value, password.value);
+
     try {
-      const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredentials = await serviceRegister(email, password);
       showMenssaje(`we send an email ${userCredentials.user.email}`);
-      sendEmailVerification(auth.currentUser);
-      // onNavigate('/StartPage');
+      verify(userCredentials.user);
+      console.log(userCredentials);
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario
