@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+import Toastify from 'toastify-js';
+
 export function showMenssaje(messaje, type = 'success') {
   Toastify({
     text: messaje,
