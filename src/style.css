@@ -2,6 +2,22 @@ body {
     font-family: 'Lato', sans-serif;
     margin: 0px;
   }
+
+  header {
+    background-repeat: no-repeat;
+    background-color: #EE9966;
+    height: 50px;
+    width: 100%;
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    z-index: 1000; /* Asegura que el header esté por encima del contenido */
+  }
+
+  nav {
+    background-image: url ('src/imagenes/logo.png');
+  }
+
 h1, h2 {
     color: #C96A36;
     font-weight: bold;
@@ -55,6 +71,7 @@ input {
   position: fixed;
   bottom: 150px;
 }
+
 #welcome-section {
   display: flex;
   flex-direction: column;
