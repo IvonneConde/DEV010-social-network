@@ -2,6 +2,7 @@ import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 
 import { onNavigate } from '../main.js';
 import { auth } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
+import { serviceLogin } from '../services/authLogin.js';
 
 export const Login = () => {
   const section = document.createElement('section');
@@ -25,7 +26,7 @@ export const Login = () => {
     const password = inputPass.value;
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await serviceLogin(email, password);
       onNavigate('/StartPage');
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
