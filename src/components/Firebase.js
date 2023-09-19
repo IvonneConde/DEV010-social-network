@@ -11,13 +11,12 @@ import { getAuth } from 'firebase/auth';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBW0ufPks5_O3-pFP48qauOLGrXTAutFeg",
-  authDomain: "social-network-hipet.firebaseapp.com",
-  projectId: "social-network-hipet",
-  storageBucket: "social-network-hipet.appspot.com",
-  messagingSenderId: "801733192048",
-  appId: "1:801733192048:web:4e7f9eac4fcb31500447b5",
-  measurementId: "G-3V4VJBGMZF"
+  apiKey: "AIzaSyA1ELajubLUPKuRqd7BO1OL-Doh40emZfQ",
+  authDomain: "prueba-41bf2.firebaseapp.com",
+  projectId: "prueba-41bf2",
+  storageBucket: "prueba-41bf2.appspot.com",
+  messagingSenderId: "82399426981",
+  appId: "1:82399426981:web:5fda8d509594688dc7d04c"
 };
 
 // Initialize Firebase

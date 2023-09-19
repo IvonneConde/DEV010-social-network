@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import {
-  auth, post, getPost, onGetPost, detelePost, getEdit, updatePost,
+auth, post, getPost, onGetPost, detelePost, getEdit, updatePost,
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
 
@@ -36,41 +36,41 @@ export const StartPage = () => {
   const buttonSave = document.createElement('button');
   buttonSave.textContent = 'Publish';
 
-  window.addEventListener('DOMContentLoaded', async () => {
-    onGetPost((querySnapshot) => { // Publica en tiempo real
-      let posthtml = '';
-      querySnapshot.forEach((doc) => { // Recorre y publica todo lo que está en la base de datos
-        const postData = doc.data();
-        posthtml += ` 
-        <section>
+  // window.addEventListener('DOMContentLoaded', async () => {
+  onGetPost((querySnapshot) => { // Publica en tiempo real
+    let posthtml = '';
+    querySnapshot.forEach((doc) => { // Recorre y publica todo lo que está en la base de datos
+      const postData = doc.data();
+      posthtml += ` 
+        <section class='post'>
         <p>${postData.textDescription}</p>
 
         <button class='btn-delete' data-id = '${doc.id}'>Delete</button>
         <button class='btn-edit' data-id = '${doc.id}'>Edit</button>
         </section>`;
-      });
+    });
 
-      container.innerHTML = posthtml;
-      const btnDelete = container.querySelectorAll('.btn-delete');
-      btnDelete.forEach((btn) => {
-        btn.addEventListener('click', ({ target: { dataset } }) => {
-          detelePost(dataset.id);
-        });
+    container.innerHTML = posthtml;
+    const btnDelete = container.querySelectorAll('.btn-delete');
+    btnDelete.forEach((btn) => {
+      btn.addEventListener('click', ({ target: { dataset } }) => {
+        detelePost(dataset.id);
       });
-      const btnEdit = container.querySelectorAll('.btn-edit');
-      btnEdit.forEach((btn) => {
-        btn.addEventListener('click', async (e) => {
-          const doc = await getEdit(e.target.dataset.id);
-          const postE = doc.data();
-          const textDescription = document.getElementById('textDescription');
-          textDescription.value = postE.textDescription;
-          editStatus = true;
-          id = doc.id;
-          buttonSave.innerText = 'Update';
-        });
+    });
+    const btnEdit = container.querySelectorAll('.btn-edit');
+    btnEdit.forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const doc = await getEdit(e.target.dataset.id);
+        const postE = doc.data();
+        const textDescription = document.getElementById('textDescription');
+        textDescription.value = postE.textDescription;
+        editStatus = true;
+        id = doc.id;
+        buttonSave.innerText = 'Update';
       });
     });
   });
+  // });
 
   buttonSave.addEventListener('click', (e) => {
     e.preventDefault();
