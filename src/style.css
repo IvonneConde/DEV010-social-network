@@ -12,21 +12,25 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; /* Asegura que el header esté por encima del contenido */
+  z-index: 1000;
+  /* Asegura que el header esté por encima del contenido */
 }
 
 .start-page-header {
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin-left: auto; /* Alinea a la derecha */
+  margin-left: auto;
+  /* Alinea a la derecha */
 }
 
 .logo {
   display: flex;
-  margin: 0 auto; /* Centra horizontalmente */
+  margin: 0 auto;
+  /* Centra horizontalmente */
   background-position: 10px center;
-  width: 20%; /* Reduce el tamaño del logo */
+  width: 20%;
+  /* Reduce el tamaño del logo */
   max-width: 200px;
 }
 
@@ -36,14 +40,30 @@ header {
   font-family: 'Lato', sans-serif;
   background: #EBE9E9;
   border: 20px;
+  border-radius: 15px;
   margin: 5px;
   box-sizing: border-box;
-  height: 80px;
+  height: auto; /* Cambiamos de 30px a auto */
   overflow-x: hidden;
   overflow-y: auto;
   padding: 8px;
   resize: none;
   width: 80%;
+}
+
+#containerPost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post {
+  display: flex;
+  padding: 5px;
+  width: 80%;
+  background: #EBE9E9;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 h1,
@@ -56,7 +76,7 @@ h2 {
 }
 
 button {
-  display: inline;
+  display: inline-block;
   color: #FFFFFF;
   font-family: 'Lato', sans-serif;
   font-weight: bold;
@@ -67,13 +87,16 @@ button {
   width: 40%;
   cursor: pointer;
   transition: background-color 0.5s, color 0.5s;
+  margin: 10px;
 }
 
-.LogOutButton{
+.LogOutButton {
   display: inline;
-  margin-left: 75%; /* Alinea a la derecha */
+  margin-left: 75%;
+  /* Alinea a la derecha */
   margin-top: 20px;
-  text-align: center; /* Centra el texto horizontalmente */
+  text-align: center;
+  /* Centra el texto horizontalmente */
   color: #282F39;
   font-family: 'Lato', sans-serif;
   font-size: 50%;
@@ -86,6 +109,28 @@ button {
   box-sizing: border-box;
 }
 
+.btn-delete,
+.btn-edit {
+  display: inline-block;
+  font-family: 'Lato', sans-serif;
+  font-size: 50%;
+  color: #444E5E;
+  background-color: #DED7CD;
+  margin: 5px;
+  height: 20px;
+  width: 25%;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: 75%;
+  vertical-align: middle; /* Alineamos verticalmente los botones */
+}
+
+.btn-delete:hover,
+.btn-edit:hover {
+  background-color: #B6B0A8;
+  /*Cambio de color al pasar el mouse sobre el botón*/
+}
+
 section {
   display: flex;
   flex-direction: column;
@@ -95,7 +140,8 @@ section {
 }
 
 .startPageSection {
-  margin-top: 100px; /* Ajusta el valor del margen superior según tus preferencias */
+  margin-top: 100px;
+  /* Ajusta el valor del margen superior según tus preferencias */
 }
 
 input {
@@ -174,16 +220,20 @@ input {
 
   .logo {
     display: flex;
-    margin: 0 auto; /* Centra horizontalmente */
-    width: 8%; /* Reduce el tamaño del logo */
+    margin: 0 auto;
+    /* Centra horizontalmente */
+    width: 8%;
+    /* Reduce el tamaño del logo */
     max-width: 500px;
   }
 
-  .LogOutButton{
+  .LogOutButton {
     display: inline;
-    margin-left: 85%; /* Alinea a la derecha */
+    margin-left: 85%;
+    /* Alinea a la derecha */
     margin-top: 20px;
-    text-align: center; /* Centra el texto horizontalmente */
+    text-align: center;
+    /* Centra el texto horizontalmente */
     color: #282F39;
     font-family: 'Lato', sans-serif;
     font-size: 60%;
@@ -231,16 +281,20 @@ input {
   .logo {
     display: flex;
     margin-top: 5px;
-    margin: 0 auto; /* Centra horizontalmente */
-    width: 7%; /* Reduce el tamaño del logo */
+    margin: 0 auto;
+    /* Centra horizontalmente */
+    width: 7%;
+    /* Reduce el tamaño del logo */
     max-width: 500px;
   }
 
-  .LogOutButton{
+  .LogOutButton {
     display: inline;
-    margin-left: 85%; /* Alinea a la derecha */
+    margin-left: 85%;
+    /* Alinea a la derecha */
     margin-top: 20px;
-    text-align: center; /* Centra el texto horizontalmente */
+    text-align: center;
+    /* Centra el texto horizontalmente */
     color: #282F39;
     font-family: 'Lato', sans-serif;
     font-size: 70%;
@@ -252,7 +306,7 @@ input {
     width: 7%;
     box-sizing: border-box;
   }
-  
+
   .startPageSection {
     margin-top: 12%;
   }
