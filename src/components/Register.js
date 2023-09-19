@@ -30,7 +30,6 @@ export const Register = () => {
       const userCredentials = await serviceRegister(email, password);
       showMenssaje(`we send an email ${userCredentials.user.email}`);
       verify(userCredentials.user);
-      console.log(userCredentials);
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario

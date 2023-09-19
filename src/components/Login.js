@@ -44,7 +44,7 @@ export const Login = () => {
 
   buttonGoogle.addEventListener('click', async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+    //signInWithPopup(auth, provider);
 
     try {
       await signInWithPopup(auth, provider);
