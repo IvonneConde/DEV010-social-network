@@ -59,7 +59,7 @@ header {
 
 .post {
   display: flex;
-  padding: 5px;
+  padding: 10px;
   width: 80%;
   background: #EBE9E9;
   border-radius: 10px;
@@ -111,7 +111,6 @@ button {
 
 .btn-delete,
 .btn-edit {
-  display: inline-block;
   font-family: 'Lato', sans-serif;
   font-size: 50%;
   color: #444E5E;
@@ -119,7 +118,6 @@ button {
   margin: 5px;
   height: 20px;
   width: 25%;
-  box-sizing: border-box;
   box-sizing: border-box;
   margin-left: 75%;
   vertical-align: middle; /* Alineamos verticalmente los botones */

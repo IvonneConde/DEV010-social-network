@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import {
-auth, post, getPost, onGetPost, detelePost, getEdit, updatePost,
+  auth, post, getPost, onGetPost, detelePost, getEdit, updatePost,
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
 
@@ -30,6 +30,10 @@ export const StartPage = () => {
   // Crear el elemento <textarea> y el botón "Publish"
   const container = document.createElement('container');
   container.id = 'containerPost';
+
+  // Crear un elemento <div> para mostrar el nombre de usuario
+  const usernameDiv = document.createElement('div');
+  usernameDiv.id = 'usernameDiv'; // Asignar un ID para actualizar su contenido
   const textarea = document.createElement('textarea');
   textarea.id = 'textDescription';
   textarea.placeholder = 'Write your text here';
@@ -41,8 +45,12 @@ export const StartPage = () => {
     let posthtml = '';
     querySnapshot.forEach((doc) => { // Recorre y publica todo lo que está en la base de datos
       const postData = doc.data();
+      const postUser = postData.username; // Obtener el nombre de usuario de la publicación
       posthtml += ` 
         <section class='post'>
+        <div class='user-info'>
+        <p>User: ${postUser}</p>
+        </div>
         <p>${postData.textDescription}</p>
 
         <button class='btn-delete' data-id = '${doc.id}'>Delete</button>
@@ -73,11 +81,13 @@ export const StartPage = () => {
   // });
 
   buttonSave.addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Asegura que el formulario no se envíe ni se recargue la página
     const textDescription = document.getElementById('textDescription');
     // post(textDescription.value);
     if (!editStatus) {
-      post(textDescription.value);
+      const user = auth.currentUser; // Aquí se obtiene el objeto de usuario actualmente autenticado
+      const username = user ? user.displayName : 'Anonymous'; // Se verifica si hay un usuario autenticado (user) y, si es así, se obtiene su nombre de usuario (displayName)
+      post(textDescription.value, username); // Llama a la función post con dos argumentos
       console.log(textDescription);
     } else {
       updatePost(id, {

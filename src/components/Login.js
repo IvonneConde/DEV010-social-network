@@ -16,7 +16,7 @@ export const Login = () => {
   inputPass.type = 'Password';
   inputEmail.placeholder = 'Email';
   inputPass.placeholder = 'Password';
-  button.textContent = 'Sing In';
+  button.textContent = 'Sign In';
   buttonBack.textContent = 'Back';
   title.textContent = 'Login';
   buttonGoogle.textContent = 'Google';

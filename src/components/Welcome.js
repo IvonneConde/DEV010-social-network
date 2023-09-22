@@ -6,8 +6,8 @@ export const Welcome = () => {
   const buttonLogin = document.createElement('button');
   const buttonRegister = document.createElement('button');
 
-  buttonLogin.textContent = 'Sing In';
-  buttonRegister.textContent = 'Sing Up';
+  buttonLogin.textContent = 'Sign In';
+  buttonRegister.textContent = 'Sign Up';
   title.textContent = 'Welcome';
   title.classList.add('title');
   section.setAttribute('id', 'welcome-section');

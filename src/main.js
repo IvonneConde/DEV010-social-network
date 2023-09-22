@@ -3,6 +3,7 @@ import { Login } from './components/Login.js';
 import { error } from './components/error.js';
 import { Register } from './components/Register.js';
 import { StartPage } from './components/StartPage.js';
+import { inspect } from './services/inspect.js';
 
 const root = document.getElementById('root');
 const routes = {
@@ -22,9 +23,10 @@ export const onNavigate = (pathname) => {
   root.removeChild(root.firstChild);
   root.appendChild(routes[pathname]());
   // Verifica si el pathname es '/error' y llama a onNavigate en ese caso
-  if (pathname === '/error') {
+  /*if (pathname === '/error') {
     onNavigate('/error');
-  }
+    //inspect.onNavigate('/');
+  }*/
 };
 
 const component = routes[window.location.pathname];
