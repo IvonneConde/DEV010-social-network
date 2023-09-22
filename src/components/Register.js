@@ -1,6 +1,7 @@
+import { updateProfile } from 'firebase/auth';
 import { verify } from '../services/authVerificar.js';
 import { onNavigate } from '../main.js';
-//import { auth } from './Firebase.js';
+import { auth } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
 import { serviceRegister } from '../services/authServices.js';
 
@@ -12,11 +13,14 @@ export const Register = () => {
   const buttonBack = document.createElement('button');
   const inputEmail = document.createElement('input');
   const inputPass = document.createElement('input');
+  const inputUsername = document.createElement('input'); // Campo para el nombre de usuario
 
-  inputPass.type = 'Password';
+  inputPass.type = 'password';
   inputEmail.placeholder = 'Email';
   inputPass.placeholder = 'Password';
-  button.textContent = 'Sing Up';
+  inputUsername.placeholder = 'Username'; // Campo para el nombre de usuario
+  inputUsername.id = 'username';
+  button.textContent = 'Sign Up';
   button.id = 'button';
   buttonBack.textContent = 'Back';
   title.textContent = 'Create Account';
@@ -25,9 +29,17 @@ export const Register = () => {
   button.addEventListener('click', async () => {
     const email = inputEmail.value;
     const password = inputPass.value;
+    const username = inputUsername.value; // Obtener el nombre de usuario
+    const user = auth.currentUser;
+
+    // Verificar que se haya ingresado un nombre de usuario
+    if (!username) {
+      showMenssaje('Please enter a username', 'error');
+      return; // Salir de la función si no se ingresó un nombre de usuario
+    }
 
     try {
-      const userCredentials = await serviceRegister(email, password);
+      const userCredentials = await serviceRegister(email, password, username);
       showMenssaje(`we send an email ${userCredentials.user.email}`);
       verify(userCredentials.user);
     } catch (error) {
@@ -38,6 +50,8 @@ export const Register = () => {
         showMenssaje('password more than 6 characters', 'error');
       } else if (error.code === 'auth/invalid-email') {
         showMenssaje('Email invalid', 'error');
+      } else if (error.code === 'auth/invalid-username') {
+        showMenssaje('Username invalid', 'error');
       }
     }
   });
@@ -46,6 +60,6 @@ export const Register = () => {
     onNavigate('/');
   });
 
-  section.append(title, welcomeReg, inputEmail, inputPass, button, buttonBack);
+  section.append(title, welcomeReg, inputEmail, inputPass, inputUsername, button, buttonBack);
   return section;
 };
