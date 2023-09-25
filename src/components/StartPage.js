@@ -1,4 +1,5 @@
 import { signOut } from 'firebase/auth';
+import { doc } from 'firebase/firestore';
 import { onNavigate } from '../main.js';
 import {
   auth, post, getPost, onGetPost, detelePost, getEdit, updatePost,
@@ -50,11 +51,15 @@ export const StartPage = () => {
         <section class='post'>
         <div class='user-info'>
         <p>User: ${postUser}</p>
+        <input class= 'prueba' type='text' id= '${doc.id}'/>       
         </div>
         <p>${postData.textDescription}</p>
-
-        <button class='btn-delete' data-id = '${doc.id}'>Delete</button>
-        <button class='btn-edit' data-id = '${doc.id}'>Edit</button>
+        ${
+  auth.currentUser.email === postData.email ? `<button class='btn-delete' data-id = '${doc.id}'>Delete</button>
+          <button class='btn-edit' data-id = '${doc.id}'>Edit</button> 
+          <button class='btn-update' data-id = '${doc.id}'>update</button>` : ''
+}
+       
         </section>`;
     });
 
@@ -68,10 +73,12 @@ export const StartPage = () => {
     const btnEdit = container.querySelectorAll('.btn-edit');
     btnEdit.forEach((btn) => {
       btn.addEventListener('click', async (e) => {
+        const input = document.getElementById(e.target.dataset.id);
         const doc = await getEdit(e.target.dataset.id);
         const postE = doc.data();
         const textDescription = document.getElementById('textDescription');
         textDescription.value = postE.textDescription;
+        input.value = postE.textDescription;
         editStatus = true;
         id = doc.id;
         buttonSave.innerText = 'Update';
@@ -83,12 +90,15 @@ export const StartPage = () => {
   buttonSave.addEventListener('click', (e) => {
     e.preventDefault(); // Asegura que el formulario no se envíe ni se recargue la página
     const textDescription = document.getElementById('textDescription');
-    // post(textDescription.value);
+    if (textDescription === '') {
+      showMenssaje('Please write a post');
+      return; // Salir de la función sin realizar la publicación o actualización
+    }
+
     if (!editStatus) {
       const user = auth.currentUser; // Aquí se obtiene el objeto de usuario actualmente autenticado
       const username = user ? user.displayName : 'Anonymous'; // Se verifica si hay un usuario autenticado (user) y, si es así, se obtiene su nombre de usuario (displayName)
       post(textDescription.value, username); // Llama a la función post con dos argumentos
-      console.log(textDescription);
     } else {
       updatePost(id, {
         textDescription: textDescription.value,
