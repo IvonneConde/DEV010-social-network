@@ -1,7 +1,6 @@
-import { updateProfile } from 'firebase/auth';
+import { auth } from './Firebase.js';
 import { verify } from '../services/authVerificar.js';
 import { onNavigate } from '../main.js';
-import { auth } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
 import { serviceRegister } from '../services/authServices.js';
 
@@ -30,7 +29,6 @@ export const Register = () => {
     const email = inputEmail.value;
     const password = inputPass.value;
     const username = inputUsername.value; // Obtener el nombre de usuario
-    const user = auth.currentUser;
 
     // Verificar que se haya ingresado un nombre de usuario
     if (!username) {
@@ -42,10 +40,12 @@ export const Register = () => {
       const userCredentials = await serviceRegister(email, password, username);
       showMenssaje(`we send an email ${userCredentials.user.email}`);
       verify(userCredentials.user);
+      onNavigate('/StartPage');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        // El correo electrónico ya está en uso, muestra un mensaje al usuario
-        showMenssaje('Email already in use', 'error');
+        showMenssaje('User in use', 'error');
+      } else if (error.code === 'auth/missing-password') {
+        showMenssaje('Enter your password', 'error');
       } else if (error.code === 'auth/weak-password') {
         showMenssaje('password more than 6 characters', 'error');
       } else if (error.code === 'auth/invalid-email') {

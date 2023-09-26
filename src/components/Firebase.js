@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app';
 import {
   getFirestore, collection, addDoc, getDocs, onSnapshot, deleteDoc, doc, getDoc, updateDoc,
 } from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth} from 'firebase/auth';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,7 +25,9 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const db = getFirestore();
-export const post = (textDescription, username) => addDoc(collection(db, 'postSave'), { textDescription, username, email: auth.currentUser.email });
+export const post = (textDescription, username) => addDoc(collection(db, 'postSave'), {
+  textDescription, username, email: auth.currentUser.email,
+});
 export const getPost = () => getDocs(collection(db, 'postSave'));
 export const onGetPost = (callback) => onSnapshot(collection(db, 'postSave'), callback);
 export const detelePost = (id) => deleteDoc(doc(db, 'postSave', id));

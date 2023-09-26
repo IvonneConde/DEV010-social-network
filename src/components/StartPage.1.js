@@ -1,9 +1,10 @@
 import { signOut } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import {
-  auth, post, getPost, onGetPost, detelePost, getEdit, updatePost,
+  auth, post, onGetPost, detelePost, getEdit, updatePost,
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
+
 
 export const StartPage = () => {
   const section = document.createElement('section');
@@ -41,30 +42,37 @@ export const StartPage = () => {
   buttonSave.textContent = 'Publish';
 
   // window.addEventListener('DOMContentLoaded', async () => {
-  onGetPost((querySnapshot) => { // Publica en tiempo real
+  onGetPost((querySnapshot) => {
     let posthtml = '';
-    querySnapshot.forEach((doc) => { // Recorre y publica todo lo que está en la base de datos
+    querySnapshot.forEach((doc) => {
       const postData = doc.data();
       const postUser = postData.username; // Obtener el nombre de usuario de la publicación
       posthtml += ` 
         <section class='post'>
         <div class='user-info'>
-        <p>User: ${postUser}</p>     
+        <p>${postUser}</p>     
         </div>
         <p id='post-text-${doc.id}'>${postData.textDescription}</p>
-        ${auth.currentUser.email === postData.email ? `<button class='btn-delete' data-id = '${doc.id}'></button>
+        ${auth.currentUser.email === postData.email
+    ? `<button class='btn-delete' data-id = '${doc.id}' data-username = '${postUser}'></button>
           <button class='btn-edit' data-id = '${doc.id}'></button> 
-          <button class='btn-update' data-id = '${doc.id}'>Update</button>` : ''
-}
+          <button class='btn-update' data-id = '${doc.id}'></button>` : ''}
        
         </section>`;
     });
 
     container.innerHTML = posthtml;
+
     const btnDelete = container.querySelectorAll('.btn-delete');
     btnDelete.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
-        detelePost(dataset.id);
+        const deletePost = confirm('Are you sure you want to delete this?');
+        // const username = btnDelete.getAttribute('data-username');
+        if (deletePost) {
+          detelePost(dataset.id);
+        } else {
+          showMenssaje(`ok ${dataset.username}`);
+        }
       });
     });
     const btnEdit = container.querySelectorAll('.btn-edit');
