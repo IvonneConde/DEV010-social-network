@@ -1,5 +1,4 @@
 import { signOut } from 'firebase/auth';
-import { doc } from 'firebase/firestore';
 import { onNavigate } from '../main.js';
 import {
   auth, post, getPost, onGetPost, detelePost, getEdit, updatePost,
@@ -37,7 +36,7 @@ export const StartPage = () => {
   usernameDiv.id = 'usernameDiv'; // Asignar un ID para actualizar su contenido
   const textarea = document.createElement('textarea');
   textarea.id = 'textDescription';
-  textarea.placeholder = 'Write your text here';
+  textarea.placeholder = 'Ask the pet-loving community';
   const buttonSave = document.createElement('button');
   buttonSave.textContent = 'Publish';
 
@@ -50,14 +49,12 @@ export const StartPage = () => {
       posthtml += ` 
         <section class='post'>
         <div class='user-info'>
-        <p>User: ${postUser}</p>
-        <input class= 'prueba' type='text' id= '${doc.id}'/>       
+        <p>User: ${postUser}</p>     
         </div>
-        <p>${postData.textDescription}</p>
-        ${
-  auth.currentUser.email === postData.email ? `<button class='btn-delete' data-id = '${doc.id}'>Delete</button>
-          <button class='btn-edit' data-id = '${doc.id}'>Edit</button> 
-          <button class='btn-update' data-id = '${doc.id}'>update</button>` : ''
+        <p id='post-text-${doc.id}'>${postData.textDescription}</p>
+        ${auth.currentUser.email === postData.email ? `<button class='btn-delete' data-id = '${doc.id}'></button>
+          <button class='btn-edit' data-id = '${doc.id}'></button> 
+          <button class='btn-update' data-id = '${doc.id}'>Update</button>` : ''
 }
        
         </section>`;
@@ -73,24 +70,42 @@ export const StartPage = () => {
     const btnEdit = container.querySelectorAll('.btn-edit');
     btnEdit.forEach((btn) => {
       btn.addEventListener('click', async (e) => {
-        const input = document.getElementById(e.target.dataset.id);
         const doc = await getEdit(e.target.dataset.id);
         const postE = doc.data();
-        const textDescription = document.getElementById('textDescription');
-        textDescription.value = postE.textDescription;
-        input.value = postE.textDescription;
+        const postText = document.getElementById(`post-text-${doc.id}`);
+        postText.contentEditable = 'true'; // Hace que el texto sea editable
+        postText.focus(); // Coloca el cursor en el texto editable
         editStatus = true;
         id = doc.id;
-        buttonSave.innerText = 'Update';
+        buttonSave.innerText = 'Publish';
+      });
+    });
+
+    const btnUpdate = container.querySelectorAll('.btn-update');
+    btnUpdate.forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const postIdToUpdate = e.target.dataset.id;
+        const postText = document.getElementById(`post-text-${postIdToUpdate}`);
+        const textDescriptionToUpdate = postText.innerText;
+
+        // Actualiza el post en Firebase con los datos nuevos
+        await updatePost(postIdToUpdate, {
+          textDescription: textDescriptionToUpdate,
+        });
+
+        // Desactiva la edición y restaura el botón a "Edit"
+        postText.contentEditable = 'false';
+        editStatus = false;
+        id = '';
+        buttonSave.innerText = 'Publish';
       });
     });
   });
-  // });
 
   buttonSave.addEventListener('click', (e) => {
     e.preventDefault(); // Asegura que el formulario no se envíe ni se recargue la página
     const textDescription = document.getElementById('textDescription');
-    if (textDescription === '') {
+    if (textDescription.value.trim() === '') {
       showMenssaje('Please write a post');
       return; // Salir de la función sin realizar la publicación o actualización
     }
@@ -103,6 +118,9 @@ export const StartPage = () => {
       updatePost(id, {
         textDescription: textDescription.value,
       });
+      // Actualizar también el input en lugar del textarea
+      const input = document.getElementById(id);
+      input.value = textDescription.value;
 
       editStatus = false;
     }

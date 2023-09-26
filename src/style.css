@@ -109,18 +109,44 @@ button {
   box-sizing: border-box;
 }
 
-.btn-delete,
+.btn-delete {
+  font-family: 'Lato', sans-serif;
+  font-size: 50%;
+  color: #444E5E;
+  background-color: #DED7CD;
+  margin: 5px;
+  height: 35px;
+  width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
+  box-sizing: border-box;
+  margin-left: 75%;
+  vertical-align: middle; /* Alineamos verticalmente los botones */
+  background-image: url(./imagenes/trash-solid.svg); /* Ruta de la imagen del icono */
+  background-size: 15px 15px; /* Ajusta el tamaño del icono */
+  background-position: 10px center; /* Alinea el icono dentro del campo */
+  background-repeat: no-repeat; /* Evita que el icono se repita */
+  padding-left: 3%; /* Deja espacio para el icono en el lado derecho */
+  box-sizing: border-box; /* Incluye el padding en el ancho total del input */
+  margin-left: auto; /* Alinea el campo de búsqueda a la derecha */
+}
+
 .btn-edit {
   font-family: 'Lato', sans-serif;
   font-size: 50%;
   color: #444E5E;
   background-color: #DED7CD;
   margin: 5px;
-  height: 20px;
-  width: 25%;
+  height: 35px;
+  width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
   box-sizing: border-box;
   margin-left: 75%;
   vertical-align: middle; /* Alineamos verticalmente los botones */
+  background-image: url(./imagenes/edit-solid.svg); /* Ruta de la imagen del icono */
+  background-size: 15px 15px; /* Ajusta el tamaño del icono */
+  background-position: 10px center; /* Alinea el icono dentro del campo */
+  background-repeat: no-repeat; /* Evita que el icono se repita */
+  padding-left: 3%; /* Deja espacio para el icono en el lado derecho */
+  box-sizing: border-box; /* Incluye el padding en el ancho total del input */
+  margin-left: auto; /* Alinea el campo de búsqueda a la derecha */
 }
 
 .btn-delete:hover,
