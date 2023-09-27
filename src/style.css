@@ -89,6 +89,31 @@ button {
   transition: background-color 0.5s, color 0.5s;
   margin: 10px;
 }
+.btnGoogle{
+  display: inline-block;
+  justify-content: space-between;
+  color: #8d8d93;
+  box-shadow:3px 3px 6px;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  vertical-align: middle;
+  padding-left: 18%;
+  background-image: url(./imagenes/btn_google_light_normal_ios.svg);
+  background-repeat: no-repeat;
+  height: 45px;
+  width: 45%;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
+  margin: 10px;
+  box-sizing: content-box;
+}
+.btnGoogle:hover{
+  color: #FFFFFF;
+  background-color: #4285F4;
+}
 
 .LogOutButton {
   display: inline;
@@ -148,7 +173,33 @@ button {
   box-sizing: border-box; /* Incluye el padding en el ancho total del input */
   margin-left: auto; /* Alinea el campo de búsqueda a la derecha */
 }
+.btn-update{
 
+  font-family: 'Lato', sans-serif;
+  font-size: 50%;
+  color: #444E5E;
+  background-color: #DED7CD;
+  margin: 5px;
+  height: 35px;
+  width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
+  box-sizing: border-box;
+  margin-left: 75%;
+  vertical-align: middle; /* Alineamos verticalmente los botones */
+  background-image: url(./imagenes/upate.png); /* Ruta de la imagen del icono */
+  background-size: 15px 15px; /* Ajusta el tamaño del icono */
+  background-position: 10px center; /* Alinea el icono dentro del campo */
+  background-repeat: no-repeat; /* Evita que el icono se repita */
+  padding-left: 3%; /* Deja espacio para el icono en el lado derecho */
+  box-sizing: border-box; /* Incluye el padding en el ancho total del input */
+  margin-left: auto; /* Alinea el campo de búsqueda a la derecha */
+
+}
+.user-image{
+  margin: 5px;
+  height: 35px;
+  width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
+  box-sizing: border-box;
+}
 .btn-delete:hover,
 .btn-edit:hover {
   background-color: #B6B0A8;
@@ -269,6 +320,31 @@ input {
     width: 7%;
     box-sizing: border-box;
   }
+  .btnGoogle{
+    display: inline-block;
+    justify-content: space-between;
+    color: #8d8d93;
+    box-shadow:3px 3px 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    vertical-align: middle;
+    padding-left: 5%;
+    background-image: url(./imagenes/btn_google_light_normal_ios.svg);
+    background-repeat: no-repeat;
+    height: 45px;
+    width: 45%;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+    margin: 10px;
+    box-sizing: content-box;
+  }
+  .btnGoogle:hover{
+    color: #FFFFFF;
+    background-color: #4285F4;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -329,6 +405,31 @@ input {
     height: 30px;
     width: 7%;
     box-sizing: border-box;
+  }
+  .btnGoogle{
+    display: inline-block;
+    justify-content: space-between;
+    color: #8d8d93;
+    box-shadow:3px 3px 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    vertical-align: middle;
+    padding-left: 5%;
+    background-image: url(./imagenes/btn_google_light_normal_ios.svg);
+    background-repeat: no-repeat;
+    height: 45px;
+    width: 45%;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+    margin: 10px;
+    box-sizing: content-box;
+  }
+  .btnGoogle:hover{
+    color: #FFFFFF;
+    background-color: #4285F4;
   }
 
   .startPageSection {

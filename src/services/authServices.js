@@ -13,7 +13,8 @@ const serviceRegister = async (email, password, username) => {
 
     return userCredential; // Devuelve el userCredential actualizado con el nombre de usuario
   } catch (error) {
-    console.log(error);
+    throw error;
+    
   }
 };
 

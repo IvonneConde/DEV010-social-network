@@ -2,7 +2,7 @@ import { Welcome } from './components/Welcome.js';
 import { Login } from './components/Login.js';
 import { error } from './components/error.js';
 import { Register } from './components/Register.js';
-import { StartPage } from './components/StartPage.js';
+import { StartPage } from './components/StartPage.1.js';
 import { inspect } from './services/inspect.js';
 
 const root = document.getElementById('root');

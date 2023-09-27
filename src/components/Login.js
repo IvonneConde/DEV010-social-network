@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import { auth } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
@@ -19,7 +19,8 @@ export const Login = () => {
   button.textContent = 'Sign In';
   buttonBack.textContent = 'Back';
   title.textContent = 'Login';
-  buttonGoogle.textContent = 'Google';
+  buttonGoogle.textContent = 'Sign in with Google';
+  buttonGoogle.classList.add('btnGoogle');
 
   button.addEventListener('click', async () => {
     const email = inputEmail.value;
@@ -29,11 +30,14 @@ export const Login = () => {
       await serviceLogin(email, password);
       onNavigate('/StartPage');
     } catch (error) {
+      console.log(error);
       if (error.code === 'auth/wrong-password') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario
         showMenssaje('Incorrect password', 'error');
-      } else if (error.code === 'auth/invalid-email') {
+      } else if (error.code === 'auth/invalid-email') { // auth/invalid-login-credentials
         showMenssaje('invalid Email', 'error');
+      } else if (error.code === 'auth/invalid-login-credentials') { //
+        showMenssaje('invalid Login Credentials', 'error');
       }
     }
   });
@@ -44,7 +48,6 @@ export const Login = () => {
 
   buttonGoogle.addEventListener('click', async () => {
     const provider = new GoogleAuthProvider();
-    //signInWithPopup(auth, provider);
 
     try {
       await signInWithPopup(auth, provider);
