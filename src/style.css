@@ -59,11 +59,20 @@ header {
 
 .post {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 10px;
   width: 80%;
   background: #EBE9E9;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+.postText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
 }
 
 h1,
@@ -114,10 +123,30 @@ button {
   color: #FFFFFF;
   background-color: #4285F4;
 }
+.like-container {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+.btn-container {
+display: flex;
+position: relative;
+top: -120px;
+margin-left: 60%;
+}
+.btn-like {
+  background-image: url(./imagenes/paw.svg);
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-position: 10px center;
+  background-color: #EBE9E9;
+  height: 50px;
+  width: 50px;
+}
 
 .LogOutButton {
   display: inline;
-  margin-left: 75%;
+  margin-left: 65%;
   /* Alinea a la derecha */
   margin-top: 20px;
   text-align: center;
@@ -137,15 +166,15 @@ button {
 .btn-delete {
   font-family: 'Lato', sans-serif;
   font-size: 50%;
-  color: #444E5E;
-  background-color: #DED7CD;
+  color: #C96A36;
+  background-color: #7B3E44;
   margin: 5px;
   height: 35px;
   width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
   box-sizing: border-box;
   margin-left: 75%;
   vertical-align: middle; /* Alineamos verticalmente los botones */
-  background-image: url(./imagenes/trash-solid.svg); /* Ruta de la imagen del icono */
+  background-image: url(./imagenes/trash.svg); /* Ruta de la imagen del icono */
   background-size: 15px 15px; /* Ajusta el tamaño del icono */
   background-position: 10px center; /* Alinea el icono dentro del campo */
   background-repeat: no-repeat; /* Evita que el icono se repita */
@@ -158,14 +187,14 @@ button {
   font-family: 'Lato', sans-serif;
   font-size: 50%;
   color: #444E5E;
-  background-color: #DED7CD;
+  background-color: #7B3E44;
   margin: 5px;
   height: 35px;
   width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
   box-sizing: border-box;
   margin-left: 75%;
   vertical-align: middle; /* Alineamos verticalmente los botones */
-  background-image: url(./imagenes/edit-solid.svg); /* Ruta de la imagen del icono */
+  background-image: url(./imagenes/edit.svg); /* Ruta de la imagen del icono */
   background-size: 15px 15px; /* Ajusta el tamaño del icono */
   background-position: 10px center; /* Alinea el icono dentro del campo */
   background-repeat: no-repeat; /* Evita que el icono se repita */
@@ -178,14 +207,14 @@ button {
   font-family: 'Lato', sans-serif;
   font-size: 50%;
   color: #444E5E;
-  background-color: #DED7CD;
+  background-color: #7B3E44;
   margin: 5px;
   height: 35px;
   width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
   box-sizing: border-box;
   margin-left: 75%;
   vertical-align: middle; /* Alineamos verticalmente los botones */
-  background-image: url(./imagenes/upate.png); /* Ruta de la imagen del icono */
+  background-image: url(./imagenes/check.svg); /* Ruta de la imagen del icono */
   background-size: 15px 15px; /* Ajusta el tamaño del icono */
   background-position: 10px center; /* Alinea el icono dentro del campo */
   background-repeat: no-repeat; /* Evita que el icono se repita */
@@ -200,15 +229,24 @@ button {
   width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
   box-sizing: border-box;
 }
+.user-info {
+  display: flex;
+  float: right;
+  width: 40%;
+  height: 30%;
+  font-weight: bold;
+}
 .btn-delete:hover,
-.btn-edit:hover {
-  background-color: #B6B0A8;
+.btn-edit:hover,
+.btn-update:hover {
+  background-color: #EE9966;
   /*Cambio de color al pasar el mouse sobre el botón*/
 }
 
 section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
   align-items: center;
   padding: 20px;
@@ -304,7 +342,7 @@ input {
 
   .LogOutButton {
     display: inline;
-    margin-left: 85%;
+    margin-left: 65%;
     /* Alinea a la derecha */
     margin-top: 20px;
     text-align: center;
@@ -345,6 +383,27 @@ input {
     color: #FFFFFF;
     background-color: #4285F4;
   }
+  .like-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+  .btn-container {
+    display: flex;
+    position: relative;
+    top: -105px;
+    margin-left: 75%;
+  }
+  .btn-like {
+    background-image: url(./imagenes/paw.svg);
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-position: 10px center;
+    background-color: #EBE9E9;
+    height: 50px;
+    width: 50px;
+  }
+  
 }
 
 @media screen and (min-width: 1024px) {
@@ -390,7 +449,7 @@ input {
 
   .LogOutButton {
     display: inline;
-    margin-left: 85%;
+    margin-left: 65%;
     /* Alinea a la derecha */
     margin-top: 20px;
     text-align: center;
@@ -406,6 +465,14 @@ input {
     width: 7%;
     box-sizing: border-box;
   }
+
+  .btn-container {
+    display: flex;
+    position: relative;
+    top: -105px;
+    margin-left: 75%;
+  }
+  
   .btnGoogle{
     display: inline-block;
     justify-content: space-between;

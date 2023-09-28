@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import {
-  auth, post, onGetPost, detelePost, getEdit, updatePost,
+  auth, post, onGetPost, detelePost, getEdit, updatePost, updateLike,
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
 
@@ -52,17 +52,27 @@ export const StartPage = () => {
         <div class='user-info'>
         <p>${postUser}</p>     
         </div>
-        <p id='post-text-${doc.id}'>${postData.textDescription}</p>
+        <p class='postText' id='post-text-${doc.id}'>${postData.textDescription}</p>
         ${auth.currentUser.email === postData.email
-    ? `<button class='btn-delete' data-id = '${doc.id}' data-username = '${postUser}'></button>
+    ? `<div class='btn-container'><button class='btn-delete' data-id = '${doc.id}' data-username = '${postUser}'></button>
           <button class='btn-edit' data-id = '${doc.id}'></button> 
-          <button class='btn-update' data-id = '${doc.id}'></button>` : ''}
-       
+          <button class='btn-update' data-id = '${doc.id}'></button></div>` : ''}
+          <div class='like-container'>
+          <button class='btn-like' data-postid ='${doc.id}'></button>
+          </div>
         </section>`;
     });
 
     container.innerHTML = posthtml;
-
+    const btnLike = container.querySelectorAll('.btn-like');
+    btnLike.forEach((btn) => {
+      btn.addEventListener('click', ({ target: { dataset } }) => {
+        // console.log(dataset.postid, auth.currentUser.email);
+        updateLike(dataset.postid, auth.currentUser.email).then((res) => {
+          // console.log('ok');
+        });
+      });
+    });
     const btnDelete = container.querySelectorAll('.btn-delete');
     btnDelete.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {

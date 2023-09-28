@@ -1,9 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, addDoc, getDocs, onSnapshot, deleteDoc, doc, getDoc, updateDoc,
+  getFirestore, collection, addDoc, getDocs,
+  onSnapshot, deleteDoc, doc, getDoc, updateDoc, arrayUnion,
 } from 'firebase/firestore';
-import { getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -33,3 +34,4 @@ export const onGetPost = (callback) => onSnapshot(collection(db, 'postSave'), ca
 export const detelePost = (id) => deleteDoc(doc(db, 'postSave', id));
 export const getEdit = (id) => getDoc(doc(db, 'postSave', id));
 export const updatePost = (id, newFields) => updateDoc(doc(db, 'postSave', id), newFields);
+export const updateLike = (id, email) => updateDoc(doc(db, 'postSave', id), { like: arrayUnion(email) });
