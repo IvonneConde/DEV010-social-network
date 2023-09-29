@@ -27,7 +27,7 @@ export const auth = getAuth(app);
 
 const db = getFirestore();
 export const post = (textDescription, username) => addDoc(collection(db, 'postSave'), {
-  textDescription, username, email: auth.currentUser.email,
+  textDescription, username, email: auth.currentUser.email, photoURL: auth.currentUser.photoURL,
 });
 export const getPost = () => getDocs(collection(db, 'postSave'));
 export const onGetPost = (callback) => onSnapshot(collection(db, 'postSave'), callback);

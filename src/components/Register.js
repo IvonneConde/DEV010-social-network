@@ -1,4 +1,4 @@
-import { auth } from './Firebase.js';
+//import { auth } from './Firebase.js';
 import { verify } from '../services/authVerificar.js';
 import { onNavigate } from '../main.js';
 import { showMenssaje } from './ShowMenssaje.js';
