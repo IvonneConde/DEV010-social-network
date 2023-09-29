@@ -5,7 +5,6 @@ import {
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
 
-
 export const StartPage = () => {
   const section = document.createElement('section');
   let editStatus = false;
@@ -46,10 +45,16 @@ export const StartPage = () => {
     let posthtml = '';
     querySnapshot.forEach((doc) => {
       const postData = doc.data();
-      const postUser = postData.username; // Obtener el nombre de usuario de la publicación
+      const postUser = postData.username;
+      // Obtener el nombre de usuario de la publicación
       posthtml += ` 
         <section class='post'>
         <div class='user-info'>
+        ${
+  postData.photoURL
+    ? `<img class='photoURL' src='${postData.photoURL}' width="25%"/>`
+    : ''
+}
         <p>${postUser}</p>     
         </div>
         <p class='postText' id='post-text-${doc.id}'>${postData.textDescription}</p>
@@ -65,9 +70,20 @@ export const StartPage = () => {
 
     container.innerHTML = posthtml;
     const btnLike = container.querySelectorAll('.btn-like');
+
     btnLike.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
-        // console.log(dataset.postid, auth.currentUser.email);
+        // Verifica si el botón ya tiene una clase específica para la imagen
+        if (btn.classList.contains('liked')) {
+          // Si ya tiene la clase "liked", cambia a la imagen inicial
+          btn.classList.remove('liked');
+          btn.innerHTML = '';
+        } else {
+          // Si no tiene la clase "liked", cambia a la imagen de "like"
+          btn.classList.add('liked');
+          btn.innerHTML = '<img class="btnLikeImg">';
+        }
+
         updateLike(dataset.postid, auth.currentUser.email).then((res) => {
           // console.log('ok');
         });

@@ -23,7 +23,9 @@ header {
   margin-left: auto;
   /* Alinea a la derecha */
 }
-
+.photoURL{
+  border-radius:150px
+}
 .logo {
   display: flex;
   margin: 0 auto;
@@ -142,6 +144,30 @@ margin-left: 60%;
   background-color: #EBE9E9;
   height: 50px;
   width: 50px;
+}
+
+.btn-like{
+  outline: none; 
+  background-image: url(./imagenes/upLike.svg);
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-position: 10px center;
+  background-color: #EBE9E9;
+  height: 50px;
+  width: 50px;
+  border: none;/* Elimina el borde de enfoque */
+  /* Agrega otros estilos para desactivar la apariencia de presionado, si es necesario */
+}
+
+.btnLikeImg{
+  background-image: url(./imagenes/upLike.svg);
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-position: 10px center;
+  background-color: #EBE9E9;
+  height: 50px;
+  width: 50px;
+  border: none;
 }
 
 .LogOutButton {
