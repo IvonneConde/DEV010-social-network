@@ -1,44 +1,44 @@
 import { signOut } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import {
-  auth, post, onGetPost, detelePost, getEdit, updatePost, updateLike,
+  auth, post, onGetPost, detelePost, getEdit, updatePost, saveLike, unlike,
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
 
 export const StartPage = () => {
-  const section = document.createElement('section');
-  let editStatus = false;
-  let id = '';
+  const section = document.createElement('section'); // crea la section
+  let editStatus = false; // variable booleana para utilizarla en edit
+  let id = ''; // se inicia el id
 
-  section.classList.add('startPageSection');
+  section.classList.add('startPageSection');// agrega la clase
 
   // Crear el elemento <header> y agregar el botón "Log out"
   const header = document.createElement('header');
   header.classList.add('startPageHeader'); // Agrega una clase personalizada
-  const logOut = document.createElement('button');
-  logOut.classList.add('LogOutButton');
-  logOut.textContent = 'Log out';
-  header.appendChild(logOut);
+  const logOut = document.createElement('button'); // crea un boton
+  logOut.classList.add('LogOutButton');// agrega la clase
+  logOut.textContent = 'Log out'; // pone texto en el boton
+  header.appendChild(logOut); // agrega logout como nodo hijo en el DOM
 
   // Crear el elemento <img>
-  const logo = document.createElement('img');
-  logo.classList.add('logo');
-  logo.src = ('../imagenes/logo.png');
+  const logo = document.createElement('img'); // crea elemento de imagen
+  logo.classList.add('logo'); // agrega la clase
+  logo.src = ('../imagenes/logo.png'); // sube la imagen
   logo.alt = 'Logo'; // Agrega un texto alternativo para accesibilidad
   header.appendChild(logo); // Agregar el logotipo como hijo de header
 
   // Crear el elemento <textarea> y el botón "Publish"
   const container = document.createElement('container');
-  container.id = 'containerPost';
+  container.id = 'containerPost'; // agrega un id al container
 
   // Crear un elemento <div> para mostrar el nombre de usuario
   const usernameDiv = document.createElement('div');
   usernameDiv.id = 'usernameDiv'; // Asignar un ID para actualizar su contenido
-  const textarea = document.createElement('textarea');
-  textarea.id = 'textDescription';
-  textarea.placeholder = 'Ask the pet-loving community';
-  const buttonSave = document.createElement('button');
-  buttonSave.textContent = 'Publish';
+  const textarea = document.createElement('textarea'); // crea un textarea
+  textarea.id = 'textDescription'; // asigna el ide del textarea
+  textarea.placeholder = 'Ask the pet-loving community'; // coloca un mensaje en textarea
+  const buttonSave = document.createElement('button'); // crea el elemento button y lo asigna en una variable
+  buttonSave.textContent = 'Publish'; // pone texto en el boton
 
   // window.addEventListener('DOMContentLoaded', async () => {
   onGetPost((querySnapshot) => {
@@ -63,7 +63,8 @@ export const StartPage = () => {
           <button class='btn-edit' data-id = '${doc.id}'></button> 
           <button class='btn-update' data-id = '${doc.id}'></button></div>` : ''}
           <div class='like-container'>
-          <button class='btn-like' data-postid ='${doc.id}'></button>
+          <button class='btn-like' data-postid ='${doc.id}'data-likes='${postData.like}'></button>
+          <span>${postData.like ? postData.like.length : 0}</span>
           </div>
         </section>`;
     });
@@ -73,20 +74,18 @@ export const StartPage = () => {
 
     btnLike.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
-        // Verifica si el botón ya tiene una clase específica para la imagen
-        if (btn.classList.contains('liked')) {
-          // Si ya tiene la clase "liked", cambia a la imagen inicial
-          btn.classList.remove('liked');
-          btn.innerHTML = '';
-        } else {
-          // Si no tiene la clase "liked", cambia a la imagen de "like"
-          btn.classList.add('liked');
-          btn.innerHTML = '<img class="btnLikeImg">';
-        }
+        const postLikes = dataset.likes ? dataset.likes.split(',') : [];
+        const userLike = postLikes.includes(auth.currentUser.email);
 
-        updateLike(dataset.postid, auth.currentUser.email).then((res) => {
-          // console.log('ok');
-        });
+        if (userLike) {
+          // Si el usuario ya dio like, quitar el like
+          unlike(dataset.postid, auth.currentUser.email);
+          btn.classList.remove('liked'); // Quita la clase 'liked'
+        } else {
+          // Si el usuario no dio like, agregar el like
+          saveLike(dataset.postid, auth.currentUser.email);
+          btn.classList.add('liked'); // Agrega la clase 'liked'
+        }
       });
     });
     const btnDelete = container.querySelectorAll('.btn-delete');

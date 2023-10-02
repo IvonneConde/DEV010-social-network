@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore, collection, addDoc, getDocs,
-  onSnapshot, deleteDoc, doc, getDoc, updateDoc, arrayUnion,
+  onSnapshot, deleteDoc, doc, getDoc, updateDoc, arrayUnion, arrayRemove,
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
@@ -34,4 +34,5 @@ export const onGetPost = (callback) => onSnapshot(collection(db, 'postSave'), ca
 export const detelePost = (id) => deleteDoc(doc(db, 'postSave', id));
 export const getEdit = (id) => getDoc(doc(db, 'postSave', id));
 export const updatePost = (id, newFields) => updateDoc(doc(db, 'postSave', id), newFields);
-export const updateLike = (id, email) => updateDoc(doc(db, 'postSave', id), { like: arrayUnion(email) });
+export const saveLike = (id, email) => updateDoc(doc(db, 'postSave', id), { like: arrayUnion(email) });
+export const unlike = (id, email) => updateDoc(doc(db, 'postSave', id), { like: arrayRemove(email) });
