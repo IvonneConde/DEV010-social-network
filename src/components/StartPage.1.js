@@ -80,6 +80,7 @@ export const StartPage = () => {
         if (userLike) {
           // Si el usuario ya dio like, quitar el like
           unlike(dataset.postid, auth.currentUser.email);
+
         } else {
           // Si el usuario no dio like, agregar el like
           saveLike(dataset.postid, auth.currentUser.email);
