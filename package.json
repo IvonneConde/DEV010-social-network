@@ -14,8 +14,9 @@
     "htmlhint": "htmlhint dist/*.html ",
     "eslint": "eslint --ext .js src/ test/",
     "stylelint": "stylelint --aei src/**/*.css",
-    "pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
+    "_pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
     "test": "jest --coverage",
+    "testing": "jest --watch",
     "dev": "vite dev src",
     "start": "npm run dev",
     "build": "vite build",
@@ -23,12 +24,13 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
+    "@types/toastify-js": "^1.12.0",
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^25.3.0",
     "htmlhint": "^1.0.0",
-    "jest": "^27.0.1",
+    "jest": "^27.5.1",
     "regenerator-runtime": "^0.13.1",
     "stylelint": "^14.1.0",
     "stylelint-config-recommended": "^6.0.0",
@@ -41,5 +43,9 @@
     "createdAt": "2023-07-26T20:52:20.605Z",
     "version": "6.5.0",
     "commit": "3cf716dfe2a8c328a7e9dce5c030cb2c3ab8531c"
+  },
+  "dependencies": {
+    "firebase": "^10.3.1",
+    "toastify-js": "^1.12.0"
   }
 }
