@@ -52,7 +52,7 @@ export const StartPage = () => {
         <div class='user-info'>
         ${
   postData.photoURL
-    ? `<img class='photoURL' src='${postData.photoURL}' width="25%"/>`
+    ? `<img class='photoURL' src='${postData.photoURL}'/>`
     : ''
 }
         <p>${postUser}</p>     
@@ -63,7 +63,7 @@ export const StartPage = () => {
           <button class='btn-edit' data-id = '${doc.id}'></button> 
           <button class='btn-update' data-id = '${doc.id}'></button></div>` : ''}
           <div class='like-container'>
-          <button class='btn-like' data-postid ='${doc.id}'data-likes='${postData.like}'></button>
+          <button class='btn-like' data-postid='${doc.id}' data-likes='${postData.like}' style='${postData.like && postData.like.includes(auth.currentUser.email) ? 'background-color: #D5D8DC;' : 'background-color: #EBE9E9;'}'></button>
           <span>${postData.like ? postData.like.length : 0}</span>
           </div>
         </section>`;
@@ -80,11 +80,10 @@ export const StartPage = () => {
         if (userLike) {
           // Si el usuario ya dio like, quitar el like
           unlike(dataset.postid, auth.currentUser.email);
-          btn.classList.remove('liked'); // Quita la clase 'liked' probar con "btn-like"
+
         } else {
           // Si el usuario no dio like, agregar el like
           saveLike(dataset.postid, auth.currentUser.email);
-          btn.classList.add('liked'); // Agrega la clase 'liked'
         }
       });
     });
