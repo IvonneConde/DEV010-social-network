@@ -7,9 +7,10 @@ import { verify } from '../src/services/authVerificar.js';
 import { Register } from '../src/components/Register.js';
 import { serviceRegister } from '../src/services/authServices.js';
 import { showMenssaje } from '../src/components/ShowMenssaje.js';
+import { onNavigate } from '../src/main.js';
 
 jest.mock('firebase/auth', () => ({ sendEmailVerification: jest.fn() })); // Mock de sendEmailVerification
-jest.mock('../src/main.js');
+jest.mock('../src/main.js', () => ({ onNavigate: jest.fn() }));
 jest.mock('../src/services/authServices.js', () => ({
   serviceRegister: jest.fn().mockImplementation(() => Promise.resolve({})),
 }));
@@ -26,7 +27,7 @@ describe('Test for register and sendEmailVerification', () => {
     expect(serviceRegister).toHaveBeenCalled();
     // Prueba para verify
     const user = {
-      email: 'jazmin220906@gmail.com',
+      email: 'jazmin',
       password: '123456',
       username: 'jazmin',
 

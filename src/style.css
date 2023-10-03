@@ -24,7 +24,11 @@ header {
   /* Alinea a la derecha */
 }
 .photoURL{
-  border-radius:150px
+  display: flex;
+  border-radius:10%;
+  height: 50px;
+  width: 50px;
+  margin-right: 8px;
 }
 .logo {
   display: flex;
@@ -51,6 +55,7 @@ header {
   padding: 8px;
   resize: none;
   width: 80%;
+  text-align: center;
 }
 
 #containerPost {
@@ -129,6 +134,7 @@ button {
   display: flex;
   position: relative;
   width: 100%;
+  align-items: center;
 }
 .btn-container {
 display: flex;
@@ -137,18 +143,23 @@ top: -120px;
 margin-left: 60%;
 }
 .btn-like {
-  background-image: url(./imagenes/paw.svg);
+   background-image: url(./imagenes/upLike.svg); 
   background-repeat: no-repeat;
   background-size: 25px 25px;
-  background-position: 10px center;
-  background-color: #EBE9E9;
+  background-position: center;
+  background-color: #EBE9E9;   
   height: 50px;
   width: 50px;
 }
 
-.liked {
+.btn-like.liked {
   
-  background-image: url(./imagenes/upLike.svg);
+  background-image: url(src/imagenes/upLike.svg); 
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-position: center;
+  height: 50px;
+  width: 50px;
 } 
 
 /* .btnLikeImg{
@@ -244,15 +255,17 @@ margin-left: 60%;
 .user-image{
   margin: 5px;
   height: 35px;
-  width: 35px; /* Cambiamos el ancho a "auto" para que se ajuste al contenido */
+  width: 35px;  /*Cambiamos el ancho a "auto" para que se ajuste al contenido */
+  border-radius: 50%;
   box-sizing: border-box;
 }
 .user-info {
   display: flex;
   float: right;
-  width: 40%;
+  /* width: 40%; */
   height: 30%;
   font-weight: bold;
+  justify-content: space-between;
 }
 .btn-delete:hover,
 .btn-edit:hover,
@@ -405,6 +418,7 @@ input {
     display: flex;
     position: relative;
     width: 100%;
+    align-items: center;
   }
   .btn-container {
     display: flex;
@@ -412,7 +426,7 @@ input {
     top: -105px;
     margin-left: 75%;
   }
-  .btn-like {
+  /* .btn-like {
     background-image: url(./imagenes/paw.svg);
     background-repeat: no-repeat;
     background-size: 25px 25px;
@@ -420,7 +434,7 @@ input {
     background-color: #EBE9E9;
     height: 50px;
     width: 50px;
-  }
+  } */
   
 }
 
