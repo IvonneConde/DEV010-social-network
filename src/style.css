@@ -25,7 +25,7 @@ header {
 }
 .photoURL{
   display: flex;
-  border-radius:10%;
+  border-radius:50%;
   height: 50px;
   width: 50px;
   margin-right: 8px;
@@ -54,7 +54,7 @@ header {
   overflow-y: auto;
   padding: 8px;
   resize: none;
-  width: 80%;
+  width: 85%;
   text-align: center;
 }
 
@@ -70,7 +70,7 @@ header {
   align-items: flex-start;
   padding: 10px;
   width: 80%;
-  background: #EBE9E9;
+  background: #FAF8F7;
   border-radius: 10px;
   margin-bottom: 10px;
 }
@@ -100,7 +100,7 @@ button {
   border-radius: 30px;
   background-color: #C96A36;
   height: 35px;
-  width: 40%;
+  width: 35%;
   cursor: pointer;
   transition: background-color 0.5s, color 0.5s;
   margin: 10px;
@@ -137,10 +137,11 @@ button {
   align-items: center;
 }
 .btn-container {
-display: flex;
-position: relative;
-top: -120px;
-margin-left: 60%;
+  display: flex;
+  /*position: relative;*/
+  top: -120px;
+  margin: 0 auto; /* Establecer márgenes automáticos a la izquierda y derecha */
+  justify-content: flex-end; /* Alinear elementos a la derecha */
 }
 .btn-like {
    background-image: url(./imagenes/upLike.svg); 
@@ -182,13 +183,13 @@ margin-left: 60%;
   /* Centra el texto horizontalmente */
   color: #282F39;
   font-family: 'Lato', sans-serif;
-  font-size: 50%;
+  font-size: 60%;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   background-color: #FFFFFF;
-  height: 20px;
-  width: 15%;
+  height: 25px;
+  width: 25%;
   box-sizing: border-box;
 }
 
@@ -383,10 +384,10 @@ input {
     font-size: 60%;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     background-color: #FFFFFF;
     height: 25px;
-    width: 7%;
+    width: 12%;
     box-sizing: border-box;
   }
   .btnGoogle{
@@ -423,18 +424,12 @@ input {
   .btn-container {
     display: flex;
     position: relative;
-    top: -105px;
+    /*top: -105px;*/
     margin-left: 75%;
   }
-  /* .btn-like {
-    background-image: url(./imagenes/paw.svg);
-    background-repeat: no-repeat;
-    background-size: 25px 25px;
-    background-position: 10px center;
-    background-color: #EBE9E9;
-    height: 50px;
-    width: 50px;
-  } */
+  #textDescription {
+    width: 82%;
+  }
   
 }
 
@@ -488,20 +483,20 @@ input {
     /* Centra el texto horizontalmente */
     color: #282F39;
     font-family: 'Lato', sans-serif;
-    font-size: 70%;
+    font-size: 80%;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     background-color: #FFFFFF;
     height: 30px;
-    width: 7%;
+    width: 12%;
     box-sizing: border-box;
   }
 
   .btn-container {
     display: flex;
     position: relative;
-    top: -105px;
+    /*top: -105px;*/
     margin-left: 75%;
   }
   
@@ -534,4 +529,8 @@ input {
   .startPageSection {
     margin-top: 12%;
   }
+  #textDescription {
+    width: 55%;
+  }
+  
 }

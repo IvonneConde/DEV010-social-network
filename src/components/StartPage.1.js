@@ -17,7 +17,7 @@ export const StartPage = () => {
   header.classList.add('startPageHeader'); // Agrega una clase personalizada
   const logOut = document.createElement('button'); // crea un boton
   logOut.classList.add('LogOutButton');// agrega la clase
-  logOut.textContent = 'Log out'; // pone texto en el boton
+  logOut.textContent = 'Logout'; // pone texto en el boton
   header.appendChild(logOut); // agrega logout como nodo hijo en el DOM
 
   // Crear el elemento <img>
@@ -63,7 +63,7 @@ export const StartPage = () => {
           <button class='btn-edit' data-id = '${doc.id}'></button> 
           <button class='btn-update' data-id = '${doc.id}'></button></div>` : ''}
           <div class='like-container'>
-          <button class='btn-like' data-postid='${doc.id}' data-likes='${postData.like}' style='${postData.like && postData.like.includes(auth.currentUser.email) ? 'background-color: #D5D8DC;' : 'background-color: #EBE9E9;'}'></button>
+          <button class='btn-like' data-postid='${doc.id}' data-likes='${postData.like}' style='${postData.like && postData.like.includes(auth.currentUser.email) ? 'background-color: #FAF8F7;' : 'background-color: #FFE3D2;'}'></button>
           <span>${postData.like ? postData.like.length : 0}</span>
           </div>
         </section>`;
