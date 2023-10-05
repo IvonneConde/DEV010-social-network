@@ -17,7 +17,9 @@ export const Login = () => {
   inputEmail.placeholder = 'Email';
   inputPass.placeholder = 'Password';
   button.textContent = 'Sign In';
+  button.id = 'SignIn';
   buttonBack.textContent = 'Back';
+  buttonBack.id = 'Back';
   title.textContent = 'Login';
   buttonGoogle.textContent = 'Sign in with Google';
   buttonGoogle.classList.add('btnGoogle');
@@ -30,7 +32,6 @@ export const Login = () => {
       await serviceLogin(email, password);
       onNavigate('/StartPage');
     } catch (error) {
-      console.log(error);
       if (error.code === 'auth/wrong-password') {
         // El correo electrónico ya está en uso, muestra un mensaje al usuario
         showMenssaje('Incorrect password', 'error');

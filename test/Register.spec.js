@@ -1,7 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { fireEvent } from '@testing-library/dom'; // se utiliza en pruebas unitarias para simular eventos en elementos del DOM.
 import { sendEmailVerification } from 'firebase/auth';
 import { verify } from '../src/services/authVerificar.js';
 import { Register } from '../src/components/Register.js';
@@ -11,12 +12,56 @@ import { onNavigate } from '../src/main.js';
 
 jest.mock('firebase/auth', () => ({ sendEmailVerification: jest.fn() })); // Mock de sendEmailVerification
 jest.mock('../src/main.js', () => ({ onNavigate: jest.fn() }));
+// jest.mock('../src/services/authVerificar.js', () => ({ verify: jest.fn() }));
 jest.mock('../src/services/authServices.js', () => ({
   serviceRegister: jest.fn().mockImplementation(() => Promise.resolve({})),
 }));
 
 jest.mock('../src/components/ShowMenssaje.js', () => ({ showMenssaje: jest.fn() }));
 jest.spyOn(console, 'log').mockImplementation(() => {}); // Mock de console.log
+
+describe('Register Component', () => {
+  test('Clicking the button without a username should show an error message', async () => {
+    const register = Register(); // Crea una instancia del componente Register
+    document.body.appendChild(register); // Agrega el componente al DOM
+    document.querySelector('#username').value = '';
+    const button = document.getElementById('button'); // Encuentra el botón
+    // Verificar que el mensaje de error se muestre correctamente
+    // Disparar el evento de clic en el botón sin ingresar un nombre de usuario
+    fireEvent.click(button);
+    expect(showMenssaje).toHaveBeenCalledWith('Please enter a username', 'error');
+  });
+});
+// describe('Register verify', () => {
+// ...
+
+//   test('successful registration should show success message and navigate', async () => {
+//     const register = Register();
+//     document.body.appendChild(register);
+
+//     // Configura valores de prueba en los campos de entrada
+//     document.querySelector('#username').value = 'jazmin';
+//     document.querySelector('[name="email"]').value = 'jazmin220906@gmail.com';
+//     document.querySelector('#inputPass').value = 'password123';
+//     const button = document.getElementById('button');
+
+//     // Dispara el evento de clic en el botón de registro
+//     fireEvent.click(button);
+
+//     // Espera a que se muestre el mensaje de éxito
+//     await showMenssaje.findByText('we send an email jazmin220906@gmail.com');
+
+//     // Verifica que la función verify se haya llamado con el usuario adecuado
+//     expect(verify).toHaveBeenCalledWith({
+//       email: 'jazmin220906@gmail.com',
+//       password: 'password123',
+//       username: 'jazmin',
+//     });
+
+//     // Verifica que onNavigate se haya llamado con la ruta adecuada
+//     expect(onNavigate).toHaveBeenCalledWith('/StartPage');
+//   });
+// });
 
 describe('Test for register and sendEmailVerification', () => {
   test('create register and email component', () => {
@@ -27,7 +72,7 @@ describe('Test for register and sendEmailVerification', () => {
     expect(serviceRegister).toHaveBeenCalled();
     // Prueba para verify
     const user = {
-      email: 'jazmin',
+      email: 'jazmin220906@gmail.com',
       password: '123456',
       username: 'jazmin',
 
