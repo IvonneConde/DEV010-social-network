@@ -17,7 +17,7 @@ export const StartPage = () => {
   header.classList.add('startPageHeader'); // Agrega una clase personalizada
   const logOut = document.createElement('button'); // crea un boton
   logOut.classList.add('LogOutButton');// agrega la clase
-  logOut.textContent = 'Log out'; // pone texto en el boton
+  logOut.textContent = 'Logout'; // pone texto en el boton
   header.appendChild(logOut); // agrega logout como nodo hijo en el DOM
 
   // Crear el elemento <img>
@@ -85,7 +85,6 @@ export const StartPage = () => {
             // Si el usuario no dio like, agregar el like
             saveLike(dataset.postid, auth.currentUser.email);
           }
-        }
       });
     });
     const btnDelete = container.querySelectorAll('.btn-delete');
