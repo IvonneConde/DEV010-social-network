@@ -18,14 +18,15 @@ export const StartPage = () => {
   const logOut = document.createElement('button'); // crea un boton
   logOut.classList.add('LogOutButton');// agrega la clase
   logOut.textContent = 'Logout'; // pone texto en el boton
-  header.appendChild(logOut); // agrega logout como nodo hijo en el DOM
 
   // Crear el elemento <img>
   const logo = document.createElement('img'); // crea elemento de imagen
   logo.classList.add('logo'); // agrega la clase
   logo.src = ('../imagenes/logo.png'); // sube la imagen
   logo.alt = 'Logo'; // Agrega un texto alternativo para accesibilidad
+
   header.appendChild(logo); // Agregar el logotipo como hijo de header
+  header.appendChild(logOut); // agrega logout como nodo hijo en el DOM
 
   // Crear el elemento <textarea> y el botón "Publish"
   const container = document.createElement('container');
@@ -40,50 +41,79 @@ export const StartPage = () => {
   const buttonSave = document.createElement('button'); // crea el elemento button y lo asigna en una variable
   buttonSave.textContent = 'Publish'; // pone texto en el boton
 
-  // window.addEventListener('DOMContentLoaded', async () => {
   onGetPost((querySnapshot) => {
-    let posthtml = '';
-    querySnapshot.forEach((doc) => {
-      const postData = doc.data();
-      const postUser = postData.username;
-      // Obtener el nombre de usuario de la publicación
-      posthtml += ` 
-        <section class='post'>
-        <div class='user-info'>
-        ${
+    // Verificar si querySnapshot está definido y contiene documentos
+    if (querySnapshot && Array.isArray(querySnapshot.docs) && querySnapshot.docs.length > 0) {
+      const posts = querySnapshot.docs.map((doc) => {
+        const postData = doc.data();
+        postData.id = doc.id;
+        return postData;
+      });
+
+      // Ordenar los posts por fecha (timestamp) de forma descendente (más reciente primero)
+      posts.sort((a, b) => b.timestamp - a.timestamp);
+
+      let posthtml = '';
+      posts.forEach((postData) => {
+        const postUser = postData.username;
+        // Obtener el nombre de usuario de la publicación
+        posthtml += `
+          <section class='post'>
+            <div class='user-info'>
+              ${
   postData.photoURL
     ? `<img class='photoURL' src='${postData.photoURL}'/>`
     : ''
 }
-        <p>${postUser}</p>     
-        </div>
-        <p class='postText' id='post-text-${doc.id}'>${postData.textDescription}</p>
-        ${auth.currentUser.email === postData.email
-    ? `<div class='btn-container'><button class='btn-delete' data-id = '${doc.id}' data-username = '${postUser}'></button>
-          <button class='btn-edit' data-id = '${doc.id}'></button> 
-          <button class='btn-update' data-id = '${doc.id}'></button></div>` : ''}
-          <div class='like-container'>
-          <button class='btn-like' data-postid='${doc.id}' data-likes='${postData.like}' style='${postData.like && postData.like.includes(auth.currentUser.email) ? 'background-color: #FAF8F7;' : 'background-color: #FFE3D2;'}'></button>
-          <span>${postData.like ? postData.like.length : 0}</span>
-          </div>
-        </section>`;
-    });
+              <p>${postUser}</p>
+            </div>
+            <p class='postText' id='post-text-${postData.id}'>${postData.textDescription}</p>
+            ${postData.timestamp
+    ? `<p class='postTime'>${postData.timestamp.toDate().toLocaleString('es-CL', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    })}</p>`
+    : ''}
+            ${auth.currentUser && auth.currentUser.email === postData.email
+    ? `<div class='btn-container'>
+                      <button class='btn-delete' data-id='${postData.id}' data-username='${postUser}'></button>
+                      <button class='btn-edit' data-id='${postData.id}'></button>
+                      <button class='btn-update' data-id='${postData.id}'></button>
+                    </div>`
+    : ''
+}
+            <div class='like-container'>
+              <button class='btn-like' data-postid='${postData.id}' data-likes='${postData.like}' style='${
+  auth.currentUser && postData.like && postData.like.includes(auth.currentUser.email)
+    ? 'background-color: #FFE3D2;'
+    : 'background-color: #FAF8F7;'
+}'></button>
+              <span>${postData.like ? postData.like.length : 0}</span>
+            </div>
+          </section>`;
+      });
+      // Agregar el HTML generado al contenedor
+      container.innerHTML = posthtml;
+    }
 
-    container.innerHTML = posthtml;
     const btnLike = container.querySelectorAll('.btn-like');
 
     btnLike.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
         const postLikes = dataset.likes ? dataset.likes.split(',') : [];
-        const userLike = postLikes.includes(auth.currentUser.email);
 
-        if (userLike) {
-          // Si el usuario ya dio like, quitar el like
-          unlike(dataset.postid, auth.currentUser.email);
-
-        } else {
-          // Si el usuario no dio like, agregar el like
-          saveLike(dataset.postid, auth.currentUser.email);
+        if (auth.currentUser) {
+          const userLike = postLikes.includes(auth.currentUser.email);
+          if (userLike) {
+            // Si el usuario ya dio like, quitar el like
+            unlike(dataset.postid, auth.currentUser.email);
+          } else {
+            // Si el usuario no dio like, agregar el like
+            saveLike(dataset.postid, auth.currentUser.email);
+          }
         }
       });
     });
@@ -134,7 +164,7 @@ export const StartPage = () => {
     });
   });
 
-  buttonSave.addEventListener('click', (e) => {
+  buttonSave.addEventListener('click', async (e) => {
     e.preventDefault(); // Asegura que el formulario no se envíe ni se recargue la página
     const textDescription = document.getElementById('textDescription');
     if (textDescription.value.trim() === '') {
