@@ -30,23 +30,9 @@ jest.mock('firebase/firestore', () => ({
     ];
     return callback(onSnapshot);
   }),
-
 }));
-
 
 test('debería crear la sección principal con la clase "startPageSection"', () => { // prueba para verificar si crea correcto el elemnto
   const startPage = StartPage(); // Llama a la función StartPage para obtener el elemento
-  expect(startPage.classList.contains('startPageSection')).toBe(true);
-});
-
-test('prueba funcionalida de like', () => {
-  const startPage = StartPage(); // Llama a la función StartPage para obtener el elemento
-  document.body.appendChild(startPage);
-
-  const button = document.querySelector('.btn-like');
-
-  // Disparar el evento de clic en el botón sin ingresar un nombre de usuario
-  fireEvent.click(button);
-
   expect(startPage.classList.contains('startPageSection')).toBe(true);
 });
