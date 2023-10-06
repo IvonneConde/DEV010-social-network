@@ -58,12 +58,12 @@ export const StartPage = () => {
         <p>${postUser}</p>     
         </div>
         <p class='postText' id='post-text-${doc.id}'>${postData.textDescription}</p>
-        ${auth.currentUser.email === postData.email
+        ${auth.currentUser && auth.currentUser.email === postData.email
     ? `<div class='btn-container'><button class='btn-delete' data-id = '${doc.id}' data-username = '${postUser}'></button>
           <button class='btn-edit' data-id = '${doc.id}'></button> 
           <button class='btn-update' data-id = '${doc.id}'></button></div>` : ''}
           <div class='like-container'>
-          <button class='btn-like' data-postid='${doc.id}' data-likes='${postData.like}' style='${postData.like && postData.like.includes(auth.currentUser.email) ? 'background-color: #FAF8F7;' : 'background-color: #FFE3D2;'}'></button>
+          <button class='btn-like' data-postid='${doc.id}' data-likes='${postData.like}' style='${auth.currentUser && postData.like && postData.like.includes(auth.currentUser.email) ? 'background-color: #D5D8DC;' : 'background-color: #EBE9E9;'}'></button>
           <span>${postData.like ? postData.like.length : 0}</span>
           </div>
         </section>`;
@@ -75,16 +75,16 @@ export const StartPage = () => {
     btnLike.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
         const postLikes = dataset.likes ? dataset.likes.split(',') : [];
-        const userLike = postLikes.includes(auth.currentUser.email);
 
-        if (userLike) {
-          // Si el usuario ya dio like, quitar el like
-          unlike(dataset.postid, auth.currentUser.email);
-
-        } else {
-          // Si el usuario no dio like, agregar el like
-          saveLike(dataset.postid, auth.currentUser.email);
-        }
+        if (auth.currentUser) {
+          const userLike = postLikes.includes(auth.currentUser.email);
+          if (userLike) {
+            // Si el usuario ya dio like, quitar el like
+            unlike(dataset.postid, auth.currentUser.email);
+          } else {
+            // Si el usuario no dio like, agregar el like
+            saveLike(dataset.postid, auth.currentUser.email);
+          }
       });
     });
     const btnDelete = container.querySelectorAll('.btn-delete');
