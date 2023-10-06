@@ -6,7 +6,7 @@ import { query } from 'firebase/firestore';
 import { StartPage } from '../src/components/StartPage.1';
 import { showMenssaje } from '../src/components/ShowMenssaje.js';
 import { onNavigate } from '../src/main.js';
-import { onGetPost, saveLike, unlike } from '../src/components/Firebase';
+import { onGetPost } from '../src/components/Firebase';
 
 jest.mock('../src/main.js', () => ({ onNavigate: jest.fn() }));
 jest.mock('../src/components/ShowMenssaje.js', () => ({ showMenssaje: jest.fn() }));
@@ -31,6 +31,7 @@ jest.mock('firebase/firestore', () => ({
     return callback(onSnapshot);
   }),
 }));
+
 test('debería crear la sección principal con la clase "startPageSection"', () => { // prueba para verificar si crea correcto el elemnto
   const startPage = StartPage(); // Llama a la función StartPage para obtener el elemento
   expect(startPage.classList.contains('startPageSection')).toBe(true);
