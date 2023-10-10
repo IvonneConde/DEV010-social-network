@@ -106,13 +106,15 @@ export const StartPage = () => {
     btnEdit.forEach((btn) => {
       btn.addEventListener('click', async (e) => {
         const doc = await getEdit(e.target.dataset.id);
-        //const postE = doc.data();
+        // const postE = doc.data();
         const postText = document.getElementById(`post-text-${doc.id}`);
-        postText.contentEditable = 'true'; // Hace que el texto sea editable
-        postText.focus(); // Coloca el cursor en el texto editable
-        editStatus = true;
-        id = doc.id;
-        buttonSave.innerText = 'Publish';
+        if (postText) {
+          postText.contentEditable = 'true'; // Hace que el texto sea editable
+          postText.focus(); // Coloca el cursor en el texto editable
+          editStatus = true;
+          id = doc.id;
+          buttonSave.innerText = 'Publish';
+        }
       });
     });
 
