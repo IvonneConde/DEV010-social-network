@@ -1,8 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
+  doc,
   getFirestore, collection, addDoc, getDocs,
-  onSnapshot, deleteDoc, doc, getDoc, updateDoc, arrayUnion, arrayRemove, serverTimestamp,
+  onSnapshot, deleteDoc, getDoc, updateDoc, arrayUnion, arrayRemove, serverTimestamp,
+  query, orderBy,
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
@@ -25,7 +27,7 @@ export const app = initializeApp(firebaseConfig);
 // Obtener el objeto de autenticación a partir de la aplicación inicializada
 export const auth = getAuth(app);
 
-const db = getFirestore();
+export const db = getFirestore();
 export const post = (textDescription, username) => addDoc(collection(db, 'postSave'), {
   textDescription,
   username,
@@ -35,7 +37,7 @@ export const post = (textDescription, username) => addDoc(collection(db, 'postSa
 });
 
 export const getPost = () => getDocs(collection(db, 'postSave'));
-export const onGetPost = (callback) => onSnapshot(collection(db, 'postSave'), callback);
+export const onGetPost = (callback) => onSnapshot(query(collection(db, 'postSave'), orderBy('timestamp', 'desc')), callback);
 export const detelePost = (id) => deleteDoc(doc(db, 'postSave', id));
 export const getEdit = (id) => getDoc(doc(db, 'postSave', id));
 export const updatePost = (id, newFields) => updateDoc(doc(db, 'postSave', id), newFields);
