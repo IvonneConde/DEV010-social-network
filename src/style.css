@@ -46,7 +46,7 @@ header {
   max-width: 100%;
   margin: auto;
   /* Centra horizontalmente si el ancho es menor al máximo */
-  margin-left: 40%;
+  margin-left: 15%;
 }
 
 #textDescription {
@@ -64,7 +64,7 @@ header {
   overflow-y: auto;
   padding: 8px;
   resize: none;
-  width: 85%;
+  width: 75%;
   text-align: center;
   line-height: 1;
 }
@@ -402,7 +402,7 @@ input {
     max-width: 100%;
     margin: auto;
     /* Centra horizontalmente si el ancho es menor al máximo */
-    margin-left: 45%;
+    margin-left: 20%;
   }
 
   section {
@@ -529,7 +529,7 @@ input {
   }
 
   #textDescription {
-    width: 82%;
+    width: 70%;
   }
 
 }
@@ -557,7 +557,7 @@ input {
     max-width: 100%;
     margin: auto;
     /* Centra horizontalmente si el ancho es menor al máximo */
-    margin-left: 45%;
+    margin-left: 20%;
   }
 
   section {
@@ -675,7 +675,7 @@ input {
   #textDescription {
     align-items: center;
     flex-direction: column;
-    width: 46%;
+    width: 66%;
   }
 
   header {
@@ -700,7 +700,7 @@ input {
     max-width: 100%;
     margin: auto;
     /* Centra horizontalmente si el ancho es menor al máximo */
-    margin-left: 45%;
+    margin-left: 21%;
   }
 
   .startPageSection {
