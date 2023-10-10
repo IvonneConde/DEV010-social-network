@@ -38,7 +38,7 @@ export const post = (textDescription, username) => addDoc(collection(db, 'postSa
 
 export const getPost = () => getDocs(collection(db, 'postSave'));
 export const onGetPost = (callback) => onSnapshot(query(collection(db, 'postSave'), orderBy('timestamp', 'desc')), callback);
-export const detelePost = (id) => deleteDoc(doc(db, 'postSave', id));
+export const deletePost = (id) => deleteDoc(doc(db, 'postSave', id));
 export const getEdit = (id) => getDoc(doc(db, 'postSave', id));
 export const updatePost = (id, newFields) => updateDoc(doc(db, 'postSave', id), newFields);
 export const saveLike = (id, email) => updateDoc(doc(db, 'postSave', id), { like: arrayUnion(email) });

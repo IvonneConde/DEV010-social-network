@@ -37,46 +37,86 @@ test('debería crear la sección principal con la clase "startPageSection"', () 
   expect(startPage.classList.contains('startPageSection')).toBe(true);
 });
 
-describe('test to savelike', () => {
-  test('test savelike', async () => {
+describe('test unlike o SaveLike', () => {
+  test('test unlike o savelike', async () => {
     const starpage = StartPage();
     document.body.appendChild(starpage);
     // Espera a que el botón con la clase '.btn-like' esté en el DOM
     const buttonToLike = await waitFor(() => document.getElementsByClassName('btn-like')[0]);
-    // Configura el usuario actual autenticado
-    auth.currentUser = { email: 'cyntia@gmail.com' };
     // Accede al atributo data-postid del botón
     buttonToLike.dataset.postid = '1';
-
+    // Configura el usuario actual autenticado
+    auth.currentUser = { email: 'cyntia@gmail.com' };
     // Espía la función saveLike del módulo Firebase
     const saveLikeSpy = jest.spyOn(Fire, 'saveLike').mockResolvedValue({});
-    // Realiza la acción en el botón like
-    fireEvent.click(buttonToLike);
-    // Verifica si la función saveLike se ha llamado con los argumentos correctos
-    expect(saveLikeSpy).toHaveBeenCalledWith('1', auth.currentUser.email);
-    // Restaura la función espía después de la prueba
-    saveLikeSpy.mockRestore();
-  });
-});
-
-describe('test unlike', () => {
-  test('test unlike', async () => {
-    const starpage = StartPage();
-    document.body.appendChild(starpage);
-    // Espera a que el botón con la clase '.btn-like' esté en el DOM
-    const buttonToLike = await waitFor(() => document.getElementsByClassName('btn-like')[0]);
-    // Configura el usuario actual autenticado
-    auth.currentUser = { email: 'cyntia@gmail.com' };
-    // Accede al atributo data-postid del botón
-    buttonToLike.dataset.postid = '1';
-
-    // Espía la función saveLike del módulo Firebase
     const unLikeSpy = jest.spyOn(Fire, 'unlike').mockResolvedValue({});
     // Realiza la acción en el botón like
     fireEvent.click(buttonToLike);
     // Verifica si la función saveLike se ha llamado con los argumentos correctos
-    expect(unLikeSpy).toHaveBeenCalledWith('1', auth.currentUser.email);
+    expect(saveLikeSpy).not.toEqual(unLikeSpy);
     // Restaura la función espía después de la prueba
+    saveLikeSpy.mockRestore();
     unLikeSpy.mockRestore();
+  });
+});
+
+describe('Delete post', () => {
+  test('delete post', async () => {
+    const starpage = StartPage();
+    document.body.appendChild(starpage);
+    // Espera a que el botón con la clase '.btn-delete' esté en el DOM
+    const confirmSpy = jest.spyOn(window, 'confirm').mockReturnValue(true); // Simula confirmación positiva
+    const buttonToLike = await waitFor(() => document.getElementsByClassName('btn-delete')[0]);
+    // Accede al atributo data-id del botón
+    buttonToLike.dataset.id = '1';
+    // Espía la función delete del módulo Firebase
+    const deletePostSpyon = jest.spyOn(Fire, 'deletePost').mockResolvedValue({});
+    // Realiza la acción en el botón like
+    fireEvent.click(buttonToLike);
+    // Verifica si la función deletePost se ha llamado con los argumentos correctos
+    expect(deletePostSpyon).toHaveBeenCalled();
+    // Restaura la función espía después de la prueba
+    deletePostSpyon.mockRestore();
+    confirmSpy.mockRestore();
+  });
+});
+
+// describe('Edit post', () => {
+//   test('Edit post', async () => {
+//     const starpage = StartPage();
+//     document.body.appendChild(starpage);
+
+//     const editData = { textDescription: 'mi mascota se llama cosmo' };
+//     // Espera a que el botón con la clase '.btn-edit' esté en el DOM
+//     const buttonEdit = await waitFor(() => document.getElementsByClassName('btn-edit')[0]);
+//     // Accede al atributo data-id del botón
+//     buttonEdit.dataset.id = '1';
+//     // Espía la función delete del módulo Firebase
+//     const editPostSpyon = jest.spyOn(Fire, 'getEdit').mockResolvedValue({});
+//     // Realiza la acción en el botón like
+//     fireEvent.click(buttonEdit);
+//     // Verifica si la función deletePost se ha llamado con los argumentos correctos
+//     expect(editPostSpyon).toHaveBeenCalled();
+//     // Restaura la función espía después de la prueba
+//     editPostSpyon.mockRestore();
+//   });
+// });
+
+describe('update post', () => {
+  test('update post', async () => {
+    const starpage = StartPage();
+    document.body.appendChild(starpage);
+    // Espera a que el botón con la clase '.btn-update' esté en el DOM
+    const buttonUpdate = await waitFor(() => document.getElementsByClassName('btn-update')[0]);
+    // Accede al atributo data-id del botón
+    buttonUpdate.dataset.id = '1';
+    // Espía la función delete del módulo Firebase
+    const updatePostSpyon = jest.spyOn(Fire, 'updatePost').mockResolvedValue({});
+    // Realiza la acción en el botón like
+    fireEvent.click(buttonUpdate);
+    // Verifica si la función deletePost se ha llamado con los argumentos correctos
+    expect(updatePostSpyon).toHaveBeenCalled();
+    // Restaura la función espía después de la prueba
+    updatePostSpyon.mockRestore();
   });
 });

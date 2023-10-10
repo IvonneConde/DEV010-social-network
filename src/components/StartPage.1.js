@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import { onNavigate } from '../main.js';
 import {
-  auth, post, onGetPost, detelePost, getEdit, updatePost, saveLike, unlike,
+  auth, post, onGetPost, deletePost, getEdit, updatePost, saveLike, unlike,
 
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
@@ -93,10 +93,10 @@ export const StartPage = () => {
     const btnDelete = container.querySelectorAll('.btn-delete');
     btnDelete.forEach((btn) => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
-        const deletePost = confirm('Are you sure you want to delete this?');
+        const deletePostco = confirm('Are you sure you want to delete this?');
         // const username = btnDelete.getAttribute('data-username');
-        if (deletePost) {
-          detelePost(dataset.id);
+        if (deletePostco) {
+          deletePost(dataset.id);
         } else {
           showMenssaje(`ok ${dataset.username}`);
         }
@@ -106,7 +106,7 @@ export const StartPage = () => {
     btnEdit.forEach((btn) => {
       btn.addEventListener('click', async (e) => {
         const doc = await getEdit(e.target.dataset.id);
-        const postE = doc.data();
+        //const postE = doc.data();
         const postText = document.getElementById(`post-text-${doc.id}`);
         postText.contentEditable = 'true'; // Hace que el texto sea editable
         postText.focus(); // Coloca el cursor en el texto editable
