@@ -32,36 +32,6 @@ describe('Register Component', () => {
     expect(showMenssaje).toHaveBeenCalledWith('Please enter a username', 'error');
   });
 });
-// describe('Register verify', () => {
-// ...
-
-//   test('successful registration should show success message and navigate', async () => {
-//     const register = Register();
-//     document.body.appendChild(register);
-
-//     // Configura valores de prueba en los campos de entrada
-//     document.querySelector('#username').value = 'jazmin';
-//     document.querySelector('[name="email"]').value = 'jazmin220906@gmail.com';
-//     document.querySelector('#inputPass').value = 'password123';
-//     const button = document.getElementById('button');
-
-//     // Dispara el evento de clic en el botón de registro
-//     fireEvent.click(button);
-
-//     // Espera a que se muestre el mensaje de éxito
-//     await showMenssaje.findByText('we send an email jazmin220906@gmail.com');
-
-//     // Verifica que la función verify se haya llamado con el usuario adecuado
-//     expect(verify).toHaveBeenCalledWith({
-//       email: 'jazmin220906@gmail.com',
-//       password: 'password123',
-//       username: 'jazmin',
-//     });
-
-//     // Verifica que onNavigate se haya llamado con la ruta adecuada
-//     expect(onNavigate).toHaveBeenCalledWith('/StartPage');
-//   });
-// });
 
 describe('Test for register and sendEmailVerification', () => {
   test('create register and email component', () => {
