@@ -81,26 +81,25 @@ describe('Delete post', () => {
   });
 });
 
-// describe('Edit post', () => {
-//   test('Edit post', async () => {
-//     const starpage = StartPage();
-//     document.body.appendChild(starpage);
+describe('Edit post', () => {
+  test('Edit post', async () => {
+    const starpage = StartPage();
+    document.body.appendChild(starpage);
 
-//     const editData = { textDescription: 'mi mascota se llama cosmo' };
-//     // Espera a que el botón con la clase '.btn-edit' esté en el DOM
-//     const buttonEdit = await waitFor(() => document.getElementsByClassName('btn-edit')[0]);
-//     // Accede al atributo data-id del botón
-//     buttonEdit.dataset.id = '1';
-//     // Espía la función delete del módulo Firebase
-//     const editPostSpyon = jest.spyOn(Fire, 'getEdit').mockResolvedValue({});
-//     // Realiza la acción en el botón like
-//     fireEvent.click(buttonEdit);
-//     // Verifica si la función deletePost se ha llamado con los argumentos correctos
-//     expect(editPostSpyon).toHaveBeenCalled();
-//     // Restaura la función espía después de la prueba
-//     editPostSpyon.mockRestore();
-//   });
-// });
+    // Espera a que el botón con la clase '.btn-edit' esté en el DOM
+    const buttonEdit = await waitFor(() => document.getElementsByClassName('btn-edit')[0]);
+    // Accede al atributo data-id del botón
+    buttonEdit.dataset.id = '1';
+    // Espía la función delete del módulo Firebase
+    const editPostSpyon = jest.spyOn(Fire, 'getEdit').mockResolvedValue({});
+    // Realiza la acción en el botón like
+    fireEvent.click(buttonEdit);
+    // Verifica si la función deletePost se ha llamado con los argumentos correctos
+    expect(Fire.getEdit).toHaveBeenCalledWith('1');
+    // Restaura la función espía después de la prueba
+    editPostSpyon.mockRestore();
+  });
+});
 
 describe('update post', () => {
   test('update post', async () => {
