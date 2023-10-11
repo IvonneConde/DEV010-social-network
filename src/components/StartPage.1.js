@@ -5,6 +5,7 @@ import {
 
 } from './Firebase.js';
 import { showMenssaje } from './ShowMenssaje.js';
+import imagen from '../imagenes/logo.png';
 
 export const StartPage = () => {
   const section = document.createElement('section'); // crea la section
@@ -24,7 +25,7 @@ export const StartPage = () => {
   // Crear el elemento <img>
   const logo = document.createElement('img'); // crea elemento de imagen
   logo.classList.add('logo'); // agrega la clase
-  logo.src = ('../imagenes/logo.png'); // sube la imagen
+  logo.src = imagen; // sube la imagen
   logo.alt = 'Logo'; // Agrega un texto alternativo para accesibilidad
   header.appendChild(logo); // Agregar el logotipo como hijo de header
 
