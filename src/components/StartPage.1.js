@@ -118,7 +118,6 @@ export const StartPage = () => {
         }
       });
     });
-
     const btnUpdate = container.querySelectorAll('.btn-update');
     btnUpdate.forEach((btn) => {
       btn.addEventListener('click', async (e) => {
