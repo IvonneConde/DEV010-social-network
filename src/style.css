@@ -410,7 +410,7 @@ input {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    padding: 20px;
+    /* padding: 20px; */
     /* margin-top: 10px; */
   }
 
@@ -565,7 +565,7 @@ input {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    padding: 20px;
+    /* padding: 20px; */
   }
 
   h1,
@@ -686,6 +686,14 @@ input {
     height: 100px;
     width: 100%;
     position: fixed;
+  }
+  
+  section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    /* padding: 20px; */
   }
 
   .logo {
