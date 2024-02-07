@@ -373,6 +373,7 @@ input {
   height: 100vh;
   background-position: center;
   background-size: cover;
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -434,6 +435,7 @@ input {
     width: 100%;
     background-position: center;
     background-size: cover;
+    box-sizing: border-box;
   }
 
   .LogOutButton {
@@ -588,6 +590,7 @@ input {
     width: 100%;
     background-position: center;
     background-size: cover;
+    box-sizing: border-box;
   }
 
   .post {
@@ -713,5 +716,18 @@ input {
 
   .startPageSection {
     margin-top: 8%;
+  }
+  #welcome-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100vh;
+    background-image: url('./imagenes/desk.png');
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
   }
 }
